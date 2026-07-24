@@ -1,1 +1,459 @@
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8da9a6">
+    <meta name="description" content="Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.">
+    <title>KI-Beziehungsübersetzer | Dyadische Kommunikation</title>
+    
+    <!-- PWA Integration -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><circle cx='256' cy='256' r='240' fill='%238da9a6'/></svg>">
+
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --bg-warm: #fdfbf7;
+            --accent-soft: #8da9a6;
+            --text-main: #3d3d3d;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-warm);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1rem;
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid var(--accent-soft);
+            color: var(--accent-soft);
+        }
+
+        .node-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 z-50 glass-card mx-4 mt-4 px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="font-bold text-xl tracking-tight text-gray-800 flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-teal-500 inline-block"></span>
+            Relational<span class="text-teal-600">AI</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+            <a href="#vision" class="nav-link font-medium hover:text-teal-600 transition">Vision</a>
+            <a href="#simulator" class="nav-link font-medium hover:text-teal-600 transition">Simulation</a>
+            <a href="#markt" class="nav-link font-medium hover:text-teal-600 transition">Markt</a>
+            <a href="#tech" class="nav-link font-medium hover:text-teal-600 transition">Technik</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <span id="pwa-status" class="text-xs px-2.5 py-1 rounded-full bg-teal-50 text-teal-700 font-semibold border border-teal-200">Online</span>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 pb-20">
+
+        <section id="vision" class="py-20 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Vom Aneinander-Vorbeireden <br><span class="text-teal-600">zum Verstehen.</span>
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Nicht die Wörter sind das Problem, sondern ihre individuelle Bedeutung. Wir bauen einen dyadischen Übersetzer, der lernt, wie genau <strong>ihr beide</strong> kommuniziert.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="p-6 glass-card w-64 shadow-sm border-t-4 border-teal-500">
+                    <h3 class="font-bold text-lg mb-2">Kein Coach</h3>
+                    <p class="text-sm text-gray-500">Es geht nicht um höfliche Floskeln, sondern um semantische Präzision.</p>
+                </div>
+                <div class="p-6 glass-card w-64 shadow-sm border-t-4 border-teal-400">
+                    <h3 class="font-bold text-lg mb-2">Echtzeit-Empathie</h3>
+                    <p class="text-sm text-gray-500">Die KI erkennt die Absicht (Illokution) hinter dem Wortlaut.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="simulator" class="py-16 bg-white rounded-3xl p-8 shadow-inner border border-gray-100">
+            <div class="mb-12 text-center">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Interaktive Demo</span>
+                <h2 class="text-3xl font-bold mt-4">Der Beziehungsübersetzer im Einsatz</h2>
+                <p class="text-gray-500 mt-2">Wähle eine Nachricht aus, um zu sehen, wie die KI zwischen Lena und Philipp vermittelt.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <!-- Message Selection -->
+                <div class="space-y-4">
+                    <button onclick="updateSim('lena')" class="w-full text-left p-4 rounded-xl border-2 border-transparent hover:border-teal-200 bg-gray-50 transition group">
+                        <div class="text-xs font-bold text-teal-600 mb-1">LENA SCHREIBT:</div>
+                        <p class="font-medium italic text-gray-700">"Ich würde mich freuen, wenn wir es noch einmal mit uns versuchen."</p>
+                    </button>
+                    <button onclick="updateSim('philipp')" class="w-full text-left p-4 rounded-xl border-2 border-transparent hover:border-teal-200 bg-gray-50 transition group">
+                        <div class="text-xs font-bold text-teal-600 mb-1">PHILIPP SCHREIBT:</div>
+                        <p class="font-medium italic text-gray-700">"Warum?"</p>
+                    </button>
+                    <button onclick="updateSim('lena_beduerfnis')" class="w-full text-left p-4 rounded-xl border-2 border-transparent hover:border-teal-200 bg-gray-50 transition group">
+                        <div class="text-xs font-bold text-teal-600 mb-1">LENA SAGT:</div>
+                        <p class="font-medium italic text-gray-700">"Ich möchte mich nicht rechtfertigen müssen!"</p>
+                    </button>
+                </div>
+
+                <!-- Simulation Output -->
+                <div id="sim-output" class="glass-card p-8 border-l-8 border-teal-500 min-h-[400px] flex flex-col justify-center">
+                    <div id="sim-placeholder" class="text-center text-gray-400">
+                        <div class="mb-4 text-4xl">💡</div>
+                        <p>Klicke links auf eine Nachricht, um den Übersetzungsprozess zu starten.</p>
+                    </div>
+                    <div id="sim-content" class="hidden space-y-6">
+                        <div>
+                            <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Erkannte Absicht (Illokution)</h4>
+                            <p id="intent-text" class="text-lg text-gray-800 font-semibold"></p>
+                        </div>
+                        <div class="h-px bg-gray-100"></div>
+                        <div>
+                            <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-2 text-right">Übersetzung für den Empfänger</h4>
+                            <div class="bg-teal-50 p-4 rounded-lg border border-teal-100 italic text-teal-900 text-right" id="translation-text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="markt" class="py-20">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold">Markt- & Konkurrenzanalyse</h2>
+                <p class="text-gray-600">Warum herkömmliche Apps bei individuellen Sprachmustern scheitern.</p>
+            </div>
+            <div class="overflow-x-auto glass-card p-4">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-sm font-bold text-gray-500 border-b border-gray-100">
+                            <th class="pb-4 px-4">Kategorie</th>
+                            <th class="pb-4 px-4">Beispiele</th>
+                            <th class="pb-4 px-4">Funktion</th>
+                            <th class="pb-4 px-4">Das "Missing Link"</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-gray-100">
+                        <tr>
+                            <td class="py-4 px-4 font-bold">Echtzeit-Mediatoren</td>
+                            <td class="py-4 px-4">Resolv, Relationship Ref</td>
+                            <td class="py-4 px-4 text-gray-600">Regelbasierte Deeskalation (Gottman/GVK)</td>
+                            <td class="py-4 px-4 text-red-500">Kein individuelles Gedächtnis</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-4 font-bold">Stil-Optimierer</td>
+                            <td class="py-4 px-4">PairMind, Rezon</td>
+                            <td class="py-4 px-4 text-gray-600">Texte "netter" formulieren</td>
+                            <td class="py-4 px-4 text-red-500">Keine semantische Dekodierung</td>
+                        </tr>
+                        <tr class="bg-teal-50">
+                            <td class="py-4 px-4 font-bold text-teal-700">Dyadischer Übersetzer</td>
+                            <td class="py-4 px-4 italic text-teal-700">Unser Konzept</td>
+                            <td class="py-4 px-4 text-teal-700">Individuelles Wissensmodell (A ↔ B)</td>
+                            <td class="py-4 px-4 font-bold text-teal-600">Vollständige Personalisierung</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="science" class="py-16 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-6">Wissenschaftlicher Impact</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Studien zur KI-gestützten Konfliktlösung zeigen, dass neutrale Mediatoren die Eskalationsrate massiv senken können. Entscheidend ist der Wechsel von <strong>individueller Assistenz</strong> (die polarisiert) zu <strong>relationaler Assistenz</strong> (die verbindet).
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-start space-x-3">
+                        <div class="mt-1 bg-teal-100 p-1 rounded-full">
+                            <div class="w-2 h-2 bg-teal-600 rounded-full"></div>
+                        </div>
+                        <span><strong>-37%</strong> Konflikteskalation durch KI-Mediation</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <div class="mt-1 bg-teal-100 p-1 rounded-full">
+                            <div class="w-2 h-2 bg-teal-600 rounded-full"></div>
+                        </div>
+                        <span>Aktivierung der kognitiven Emotionsregulation im präfrontalen Kortex</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="glass-card p-6 shadow-lg">
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-4 text-center">Basierend auf empirischen Befunden zur KI-vermittelten Kommunikation (AIMC).</p>
+            </div>
+        </section>
+
+        <section id="tech" class="py-20 bg-gray-900 text-white rounded-3xl p-8 md:p-12 overflow-hidden relative">
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-4">Das dynamische Beziehungs-Gedächtnis</h2>
+                <p class="text-gray-400 mb-12 max-w-xl">
+                    Statt bloßem Text speichern wir die Kommunikation in einem Wissensgraphen (Graph-RAG). So versteht das System, dass "Klarheit" für Philipp etwas anderes bedeutet als für Lena.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-8 py-10">
+                    <!-- Graph Node 1 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full border-2 border-teal-500 flex items-center justify-center bg-teal-900 bg-opacity-20 node-pulse mb-4">
+                            <span class="font-bold text-teal-400">Lena</span>
+                        </div>
+                        <div class="h-12 w-px bg-teal-800"></div>
+                        <div class="bg-gray-800 border border-gray-700 p-3 rounded-lg text-xs">
+                            <span class="text-teal-400">MEINT MIT</span> "Bedürfnis" <br>
+                            <span class="text-gray-400">-> Emotionale Nähe</span>
+                        </div>
+                    </div>
+
+                    <!-- Connection -->
+                    <div class="hidden lg:flex items-center text-teal-800 font-black px-4">
+                        ◀ Δ S (Kognitive Differenz) ▶
+                    </div>
+
+                    <!-- Graph Node 2 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full border-2 border-teal-400 flex items-center justify-center bg-teal-900 bg-opacity-20 node-pulse mb-4">
+                            <span class="font-bold text-teal-300">Philipp</span>
+                        </div>
+                        <div class="h-12 w-px bg-teal-800"></div>
+                        <div class="bg-gray-800 border border-gray-700 p-3 rounded-lg text-xs">
+                            <span class="text-teal-400">MEINT MIT</span> "Bedürfnis" <br>
+                            <span class="text-gray-400">-> Logische Struktur</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mt-12 text-sm">
+                    <div class="p-4 bg-gray-800 rounded-xl">
+                        <h4 class="font-bold text-teal-400 mb-2">1. Extraktion</h4>
+                        <p class="text-gray-500 italic text-xs">Ein LLM isoliert Konzepte aus dem Chat.</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-xl">
+                        <h4 class="font-bold text-teal-400 mb-2">2. Konsolidierung</h4>
+                        <p class="text-gray-500 italic text-xs">Der Graph wird via Tool-Calling (ADD/UPDATE) aktualisiert.</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-xl">
+                        <h4 class="font-bold text-teal-400 mb-2">3. Retrieval</h4>
+                        <p class="text-gray-500 italic text-xs">Bei neuen Nachrichten wird die relationale Differenz berechnet.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-teal-900 rounded-full blur-[100px] opacity-30"></div>
+        </section>
+
+        <section class="py-20">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold">Architektur für Intimität</h2>
+                <p class="text-gray-600">Datenschutz ist hier kein Feature, sondern die fundamentale Voraussetzung.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="p-6 glass-card text-center hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4 font-bold">1</div>
+                    <h5 class="font-bold text-sm mb-1">Erfassung</h5>
+                    <p class="text-[11px] text-gray-500">Ende-zu-Ende verschlüsselte Textaufnahme.</p>
+                </div>
+                <div class="p-6 glass-card text-center hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4 font-bold">2</div>
+                    <h5 class="font-bold text-sm mb-1">Dekodierung</h5>
+                    <p class="text-[11px] text-gray-500">Trennung von Lokution und Illokution.</p>
+                </div>
+                <div class="p-6 glass-card text-center hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4 font-bold">3</div>
+                    <h5 class="font-bold text-sm mb-1">Abgleich</h5>
+                    <p class="text-[11px] text-gray-500">Dyadisches Gedächtnis via Mem0 & GraphRAG.</p>
+                </div>
+                <div class="p-6 glass-card text-center hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mx-auto mb-4 font-bold">4</div>
+                    <h5 class="font-bold text-sm mb-1">Re-Framing</h5>
+                    <p class="text-[11px] text-gray-500">Tripartite Ausgabe der Übersetzung.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 p-8 bg-orange-50 border border-orange-100 rounded-2xl flex items-center space-x-6">
+                <div class="text-3xl">🛡️</div>
+                <div>
+                    <h4 class="font-bold text-orange-800">Zero-Trust Privacy</h4>
+                    <p class="text-sm text-orange-700 opacity-80">
+                        Um Halluzinationen und Sycophancy zu vermeiden, nutzt das System <em>Human-in-the-Loop</em> Bestätigungen. Keine Nachricht wird ohne Bestätigung der Absicht übersetzt. Verarbeitung erfolgt bevorzugt On-Device.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-10 border-t border-gray-200 text-center text-gray-400 text-xs">
+        <p>© 2024 Dyadisches Architekturkonzept - Personalisierter Sprach-Übersetzer</p>
+        <p class="mt-2">Basierend auf AIMC-Forschung und Graph-RAG Speicherstrukturen.</p>
+    </footer>
+
+    <script>
+        // Service Worker Registration for GitHub Pages / PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => {
+                        console.log('PWA Service Worker registered:', reg.scope);
+                    })
+                    .catch(err => {
+                        console.warn('PWA Service Worker registration failed:', err);
+                    });
+            });
+        }
+
+        // Online/Offline Status Indicator
+        window.addEventListener('online', () => {
+            const el = document.getElementById('pwa-status');
+            if (el) {
+                el.innerText = 'Online';
+                el.className = 'text-xs px-2.5 py-1 rounded-full bg-teal-50 text-teal-700 font-semibold border border-teal-200';
+            }
+        });
+        window.addEventListener('offline', () => {
+            const el = document.getElementById('pwa-status');
+            if (el) {
+                el.innerText = 'Offline (PWA Cache)';
+                el.className = 'text-xs px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-semibold border border-amber-200';
+            }
+        });
+
+        // Interactive Simulation Logic
+        const simData = {
+            lena: {
+                intent: "Sie fragt nicht nach einer Problemlösung. Sie möchte zuerst wissen, ob du dich noch einmal bewusst für die Beziehung entscheidest.",
+                translation: "Beantworte zuerst die Beziehungsfrage. Die Analyse kann danach kommen."
+            },
+            philipp: {
+                intent: "Er lehnt dich nicht ab. Er braucht erst Klarheit (logische Basis), bevor er sich festlegt.",
+                translation: "Er stellt nicht eure Beziehung infrage, sondern versucht zu verstehen, worauf er sich einlässt."
+            },
+            lena_beduerfnis: {
+                intent: "Wunsch nach emotionalem Schutzraum ohne Rechtfertigungsdruck (Lokution: Abwehr).",
+                translation: "Ich möchte deine Fragen beantworten. Wenn ich aber das Gefühl bekomme, mich beweisen zu müssen, verliere ich den Zugang zu mir."
+            }
+        };
+
+        function updateSim(key) {
+            const output = document.getElementById('sim-output');
+            const placeholder = document.getElementById('sim-placeholder');
+            const content = document.getElementById('sim-content');
+            const intentText = document.getElementById('intent-text');
+            const transText = document.getElementById('translation-text');
+
+            placeholder.classList.add('hidden');
+            content.classList.remove('hidden');
+
+            content.style.opacity = 0;
+            setTimeout(() => {
+                intentText.innerText = simData[key].intent;
+                transText.innerText = simData[key].translation;
+                content.style.transition = 'opacity 0.5s ease';
+                content.style.opacity = 1;
+            }, 100);
+        }
+
+        // Charts Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ohne KI', 'Individual-KI', 'Relationale KI'],
+                    datasets: [{
+                        label: 'Konflikt-Eskalationsrate (%)',
+                        data: [75, 82, 38],
+                        backgroundColor: [
+                            'rgba(200, 200, 200, 0.5)',
+                            'rgba(239, 68, 68, 0.5)',
+                            'rgba(20, 184, 166, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(200, 200, 200, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(20, 184, 166, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% Eskalationsrate';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { display: false }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Navigation Active State Tracking
+        window.addEventListener('scroll', () => {
+            let current = "";
+            const sections = document.querySelectorAll("section");
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            document.querySelectorAll(".nav-link").forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) {
+                    a.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
