@@ -1,1 +1,24 @@
-
+{
+"name": "KI-Beziehungsübersetzer",
+"short_name": "RelationalAI",
+"description": "Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.",
+"start_url": "./index.html",
+"display": "standalone",
+"background_color": "#fdfbf7",
+"theme_color": "#8da9a6",
+"orientation": "portrait-primary",
+"icons": [
+{
+"src": "data:image/svg+xml;utf8,",
+"sizes": "192x192",
+"type": "image/svg+xml",
+"purpose": "any maskable"
+},
+{
+"src": "data:image/svg+xml;utf8,",
+"sizes": "512x512",
+"type": "image/svg+xml",
+"purpose": "any maskable"
+}
+]
+}
