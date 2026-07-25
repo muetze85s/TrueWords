@@ -1,8 +1,8 @@
 {
 "name": "TrueWords – KI-Beziehungsübersetzer",
 "short_name": "TrueWords",
-"version": "1.3.5",
-"description": "TrueWords v1.3.5 – Multi-Context & Multi-Dyad KI-Beziehungsübersetzer.",
+"version": "1.3.6",
+"description": "TrueWords v1.3.6 – Multi-Context & Multi-Dyad KI-Beziehungsübersetzer.",
 "start_url": "./index.html",
 "display": "standalone",
 "background_color": "#fdfaf7",
