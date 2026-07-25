@@ -1,4 +1,4 @@
-const CACHE_NAME = 'truewords-v1.3.5';
+const CACHE_NAME = 'truewords-v1.3.6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -11,7 +11,7 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW TrueWords v1.3.4] Pre-caching offline assets');
+      console.log('[SW TrueWords v1.3.6] Pre-caching offline assets');
       return cache.addAll(ASSETS_TO_CACHE);
     }).then(() => self.skipWaiting())
   );
