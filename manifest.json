@@ -1,22 +1,22 @@
 {
 "name": "TrueWords – KI-Beziehungsübersetzer",
 "short_name": "TrueWords",
-"version": "1.0.2",
-"description": "TrueWords v1.0.2 – Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.",
+"version": "1.2.0",
+"description": "TrueWords v1.2.0 – Multi-Context KI-Beziehungsübersetzer für Partnerschaft, Beruf und Freundschaft.",
 "start_url": "./index.html",
 "display": "standalone",
-"background_color": "#0f172a",
-"theme_color": "#0f172a",
+"background_color": "#fdfaf7",
+"theme_color": "#0d9488",
 "orientation": "portrait-primary",
 "icons": [
 {
-"src": "data:image/svg+xml;utf8,TrueWords",
+"src": "data:image/svg+xml;utf8,",
 "sizes": "192x192",
 "type": "image/svg+xml",
 "purpose": "any maskable"
 },
 {
-"src": "data:image/svg+xml;utf8,TrueWords",
+"src": "data:image/svg+xml;utf8,",
 "sizes": "512x512",
 "type": "image/svg+xml",
 "purpose": "any maskable"
