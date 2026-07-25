@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>TrueWords v1.3.4 – Relationaler KI-Übersetzer</title>
+    <title>TrueWords v1.3.6 – Relationaler KI-Übersetzer</title>
 
-    <!-- PWA Setup & iOS Standalone Tags -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="TrueWords">
     <meta name="theme-color" content="#fdfaf7">
-    
-    <!-- Real PNG Base64 App Icon for iOS Home Screen & Favicon -->
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxACdaAAAAnElEQVR42u3BAQEAAACCIP+vbqwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwZEFEAAfzp03IAAAAASUVORK5CYII=">
+
+    <!-- High-Resolution Real PNG Base64 App Icon for iOS Home Screen (Overlapping Speech Bubbles) -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALEAAACxCAMAAAB2A32zAAAAA1BMVEUACNE+sc4qAAAAAXRSTlMAQObYZgAAACdJREFUeNrtwTEBAAAAwCo6+1de1A4AAAAAAAAAAAAAAAAAAAAAAG4N8wACR0aQcwAAAABJRU5ErkJggg==">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M96 130h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-90l-54 42v-42h-36c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%230d9488'/><path d='M236 216h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-36v42l-54-42h-90c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%23f43f5e' opacity='0.95'/></svg>">
 
-    <!-- External Tailwind CSS & Chart.js -->
+    <!-- External Styling & Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -26,7 +25,7 @@
 
         :root {
             --bg-page: #fdfaf7;
-            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.94);
         }
 
         body {
@@ -63,29 +62,28 @@
 
         @keyframes pulse {
             0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.04); opacity: 0.85; }
+            50% { transform: scale(1.05); opacity: 0.85; }
             100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body class="bg-[#fdfaf7] text-stone-900 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- Header Navigation -->
     <nav class="sticky top-0 z-50 glass-card mx-2 mt-2 md:mx-4 md:mt-3 px-3 md:px-5 py-2.5 shadow-sm border border-stone-200/80 bg-white/95 backdrop-blur-md">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
-            <!-- Logo & App Title -->
+            <!-- Logo & Title -->
             <div class="flex items-center gap-2.5 shrink-0">
                 <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center font-black text-white text-xs shadow-md ring-1 ring-slate-800">TW</div>
                 <div class="flex flex-col">
                     <div class="flex items-center gap-1.5">
                         <h1 class="text-base font-extrabold tracking-tight text-stone-900 leading-none">TrueWords</h1>
-                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-teal-100 text-teal-800 uppercase tracking-wider">v1.3.5</span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-teal-100 text-teal-800 uppercase tracking-wider">v1.3.6</span>
                     </div>
                     <p class="text-[10px] font-semibold text-stone-500 mt-0.5">Relationaler KI-Übersetzer</p>
                 </div>
             </div>
 
-            <!-- User Status & App Control -->
+            <!-- User Status & Login Display -->
             <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end w-full sm:w-auto">
                 <button onclick="switchMainTab('login')" class="flex items-center gap-1.5 text-xs font-semibold text-stone-700 bg-stone-100/90 hover:bg-stone-200 px-3 py-1.5 rounded-xl border border-stone-200 transition shadow-sm truncate max-w-[260px]">
                     <span class="shrink-0">👤</span>
@@ -96,10 +94,9 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-3 md:px-6 py-6 space-y-8 w-full flex-grow">
 
-        <!-- Intro Banner -->
+        <!-- Header Tagline -->
         <header class="text-center space-y-2 max-w-2xl mx-auto">
             <span class="inline-block px-3 py-1 rounded-full bg-teal-100 text-teal-800 text-[11px] font-bold uppercase tracking-wide">Relationaler KI-Übersetzer</span>
             <h2 class="text-2xl md:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
@@ -119,7 +116,6 @@
             <button onclick="switchMainTab('architecture')" id="tab-nav-architecture" class="py-2 px-3 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Architektur & Privacy</button>
         </div>
 
-        <!-- TAB 1: CONTEXT SIMULATOR & RE-FRAMING ENGINE -->
         <section id="sec-simulator" class="space-y-6">
             <div class="bg-stone-100 p-4 md:p-6 rounded-3xl space-y-5 border border-stone-200 shadow-inner">
                 
@@ -128,7 +124,7 @@
                         <h3 class="text-lg font-bold">1. Beziehungs-Raum & Partner wählen</h3>
                         <p class="text-[11px] text-stone-500">Jeder Raum nutzt einen isolierten Wissensgraphen.</p>
                     </div>
-                    <!-- Space Switcher Buttons -->
+                    <!-- Space Switcher -->
                     <div class="flex flex-wrap justify-center gap-2">
                         <button onclick="switchSpace('partnership')" id="btn-space-partnership" class="tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow border border-stone-200 text-teal-700 border-b-4 border-b-teal-600">❤️ Partnerschaft (Philipp)</button>
                         <button onclick="switchSpace('work')" id="btn-space-work" class="tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500">💼 Beruf (Alex)</button>
@@ -136,7 +132,7 @@
                     </div>
                 </div>
 
-                <!-- Presets vs Custom Input -->
+                <!-- Presets -->
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-stone-700 block">Test-Szenario auswählen oder eigene Nachricht eingeben:</label>
                     <div class="grid md:grid-cols-3 gap-2">
@@ -163,10 +159,10 @@
                     </div>
                 </div>
 
-                <!-- Live Simulator Output Box -->
+                <!-- Live Simulator Box -->
                 <div id="sim-box" class="glass-card p-5 md:p-6 space-y-5 border-t-4 border-teal-600">
                     <div class="grid md:grid-cols-2 gap-5 items-start">
-                        <!-- Left Side: Original & Intention -->
+                        <!-- Left Side: Lokution & Illokution -->
                         <div class="space-y-3">
                             <div>
                                 <span class="text-[10px] font-black uppercase tracking-widest text-stone-400 block mb-1">Original-Nachricht (Lokution)</span>
@@ -182,7 +178,7 @@
                             </div>
                         </div>
 
-                        <!-- Right Side: Translation Output -->
+                        <!-- Right Side: Translation & Human in the loop -->
                         <div class="space-y-3">
                             <div id="sim-trans-card" class="p-4 rounded-2xl bg-teal-50 border border-teal-200 space-y-2 shadow-sm">
                                 <span id="sim-recipient-label" class="text-[10px] font-bold uppercase text-teal-700 block">Übersetzung für Philipp</span>
@@ -191,7 +187,7 @@
                                 </p>
                             </div>
                             
-                            <!-- Human in the Loop approval & veto buttons -->
+                            <!-- Veto & Correction -->
                             <div class="space-y-2 p-3 bg-white rounded-xl border border-stone-200 text-xs">
                                 <div class="flex items-center justify-between gap-2 flex-wrap">
                                     <span class="text-stone-500 font-semibold text-[11px]">Human-in-the-Loop:</span>
@@ -205,7 +201,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Dropdown & Custom Correction Box -->
+                                <!-- Correction Panel -->
                                 <div id="correction-panel" class="hidden pt-3 border-t border-stone-200 space-y-3">
                                     <span class="text-[11px] font-bold text-rose-800 block">Was wolltest du eigentlich ausdrücken?</span>
                                     
@@ -235,7 +231,6 @@
             </div>
         </section>
 
-        <!-- TAB 2: LOGIN & PARTNER-KOPPLUNG -->
         <section id="sec-login" class="hidden space-y-6">
             <div class="grid md:grid-cols-2 gap-6 items-start">
                 <div class="glass-card p-6 space-y-4">
@@ -289,35 +284,78 @@
             </div>
         </section>
 
-        <!-- TAB 3: DYADIC MEMORY EDITOR -->
         <section id="sec-memory" class="hidden space-y-6">
             <div class="glass-card p-6 space-y-4">
                 <h3 class="text-lg font-bold">Das dyadische Gedächtnis (Wort-Bedeutungen)</h3>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100 space-y-2">
                         <h4 class="font-bold text-xs text-teal-900">Lena (Profil & Erleben)</h4>
-                        <ul class="text-xs space-y-1 text-stone-700">
-                            <li class="p-2 bg-white rounded border border-teal-100"><strong class="text-teal-700">"Bedürfnis":</strong> Wunsch nach emotionalem Schutzraum.</li>
+                        <ul class="text-xs space-y-1.5 text-stone-700">
+                            <li class="p-2 bg-white rounded-lg border border-teal-100"><strong class="text-teal-700">"Bedürfnis":</strong> Wunsch nach emotionalem Schutzraum ohne Rechtfertigung.</li>
+                            <li class="p-2 bg-white rounded-lg border border-teal-100"><strong class="text-teal-700">"Ich wünsche mir":</strong> Einladung zur emotionalen Ausrichtung.</li>
                         </ul>
                     </div>
                     <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-2">
                         <h4 class="font-bold text-xs text-indigo-900">Philipp (Profil & Logik)</h4>
-                        <ul class="text-xs space-y-1 text-stone-700">
-                            <li class="p-2 bg-white rounded border border-indigo-100"><strong class="text-indigo-700">"Warum?":</strong> Suche nach logischer Nachvollziehbarkeit.</li>
+                        <ul class="text-xs space-y-1.5 text-stone-700">
+                            <li class="p-2 bg-white rounded-lg border border-indigo-100"><strong class="text-indigo-700">"Bedürfnis":</strong> Suche nach konkreten, logischen Argumenten.</li>
+                            <li class="p-2 bg-white rounded-lg border border-indigo-100"><strong class="text-indigo-700">"Warum?":</strong> Klärungsbedarf für Nachvollziehbarkeit.</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Dark GraphRAG Visualizer -->
+            <div class="bg-stone-900 text-white rounded-3xl p-6 md:p-8 space-y-6 shadow-xl">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Dynamischer Beziehungs-Wissensgraph (GraphRAG)</h3>
+                    <p class="text-xs text-stone-400 mt-1">Statt bloßem Text speichert TrueWords die Kommunikation als relationale Differenz ($\Delta S$).</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center items-center gap-6 py-6 border-y border-stone-800">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full border-2 border-teal-500 flex items-center justify-center bg-teal-950 node-pulse mb-2">
+                            <span class="font-bold text-teal-400 text-xs">Lena</span>
+                        </div>
+                        <span class="text-[10px] text-teal-300 font-mono">"Bedürfnis" $\rightarrow$ Emotion</span>
+                    </div>
+
+                    <div class="text-center font-mono text-xs font-bold text-teal-500 px-2 py-1 bg-stone-800 rounded-lg">
+                        ◀ $\Delta S$ (Cognitive Gap) ▶
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full border-2 border-indigo-400 flex items-center justify-center bg-indigo-950 node-pulse mb-2">
+                            <span class="font-bold text-indigo-300 text-xs">Philipp</span>
+                        </div>
+                        <span class="text-[10px] text-indigo-300 font-mono">"Bedürfnis" $\rightarrow$ Logik</span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-3.5 bg-stone-800/80 rounded-xl border border-stone-700">
+                        <h4 class="font-bold text-teal-400 mb-1">1. Extraktion</h4>
+                        <p class="text-stone-400 text-[11px]">Kognitive Konzepte werden aus dem Chat isoliert.</p>
+                    </div>
+                    <div class="p-3.5 bg-stone-800/80 rounded-xl border border-stone-700">
+                        <h4 class="font-bold text-teal-400 mb-1">2. Konsolidierung</h4>
+                        <p class="text-stone-400 text-[11px]">Tool-Calling (ADD/UPDATE) aktualisiert den Dyaden-Graphen.</p>
+                    </div>
+                    <div class="p-3.5 bg-stone-800/80 rounded-xl border border-stone-700">
+                        <h4 class="font-bold text-teal-400 mb-1">3. Retrieval</h4>
+                        <p class="text-stone-400 text-[11px]">Berechnung der Re-Framing-Übersetzung in Echtzeit.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 4: WISSENSCHAFT & MARKT -->
-        <section id="sec-science" class="hidden space-y-6">
+        <section id="sec-science" class="hidden space-y-8">
             <div class="grid md:grid-cols-2 gap-6 items-center">
                 <div class="space-y-3">
                     <span class="px-2 py-0.5 bg-teal-100 text-teal-800 text-[10px] font-bold rounded-full">Empirische Forschung</span>
                     <h3 class="text-xl font-bold">Wissenschaftlicher Impact</h3>
                     <p class="text-xs text-stone-600 leading-relaxed">
-                        Studien zur KI-gestützten Konfliktlösung (AIMC) zeigen, dass neutrale Mediatoren die Eskalationsrate um 37% senken.
+                        Studien zur KI-gestützten Konfliktlösung (AIMC) zeigen, dass neutrale Mediatoren die Eskalationsrate um 37% senken. Entscheidend ist der Wechsel von individueller Assistenz (die polarisiert) zu relationaler Assistenz (die verbindet).
                     </p>
                 </div>
                 <div class="glass-card p-4 text-center">
@@ -326,15 +364,94 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Full Market Comparison Table -->
+            <div class="space-y-3">
+                <h3 class="text-lg font-bold">Markt- & Konkurrenzanalyse</h3>
+                <p class="text-xs text-stone-500">Warum bestehende Apps an individuellen Sprachmustern scheitern.</p>
+                
+                <div class="overflow-x-auto glass-card p-4">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="font-bold text-stone-500 border-b border-stone-200">
+                                <th class="pb-3 px-3">Kategorie</th>
+                                <th class="pb-3 px-3">Beispiele</th>
+                                <th class="pb-3 px-3">Funktion</th>
+                                <th class="pb-3 px-3">Das "Missing Link"</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-100">
+                            <tr>
+                                <td class="py-3 px-3 font-bold">Echtzeit-Mediatoren</td>
+                                <td class="py-3 px-3">Resolv, Relationship Ref</td>
+                                <td class="py-3 px-3 text-stone-600">Regelbasierte Deeskalation (Gottman/GVK)</td>
+                                <td class="py-3 px-3 font-semibold text-rose-600">Kein individuelles Gedächtnis</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold">Stil-Optimierer</td>
+                                <td class="py-3 px-3">PairMind, Rezon</td>
+                                <td class="py-3 px-3 text-stone-600">Texte "netter" formulieren</td>
+                                <td class="py-3 px-3 font-semibold text-rose-600">Keine semantische Dekodierung</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold">Getrennte Chatbots</td>
+                                <td class="py-3 px-3">BetterCouple</td>
+                                <td class="py-3 px-3 text-stone-600">Getrennte KI-Reflexionsgespräche</td>
+                                <td class="py-3 px-3 font-semibold text-rose-600">Keine Echtzeit-Übersetzung im Chat</td>
+                            </tr>
+                            <tr class="bg-teal-50/80 font-semibold">
+                                <td class="py-3 px-3 font-bold text-teal-900">Dyadischer Übersetzer</td>
+                                <td class="py-3 px-3 italic text-teal-900">TrueWords (Unser Konzept)</td>
+                                <td class="py-3 px-3 text-teal-900">Individuelles Wissensmodell (A ↔ B)</td>
+                                <td class="py-3 px-3 font-bold text-teal-700">Vollständige Personalisierung ✨</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </section>
 
-        <!-- TAB 5: ARCHITECTURE & PRIVACY -->
         <section id="sec-architecture" class="hidden space-y-6">
-            <div class="glass-card p-6 space-y-3">
-                <h3 class="text-lg font-bold">Privacy by Design</h3>
+            <div class="glass-card p-6 space-y-4">
+                <h3 class="text-lg font-bold">Architektur für Intimität (Privacy by Design)</h3>
                 <p class="text-xs text-stone-600 leading-relaxed">
-                    Ende-zu-Ende verschlüsselte Graphen-Isolierung für jeden Beziehungs-Raum.
+                    Ende-zu-Ende verschlüsselte Graphen-Isolierung für jeden Beziehungs-Raum. Kein Begriff aus deinem privaten Beziehungs-Graphen fließt in Übersetzungen für Kollegen ein.
                 </p>
+
+                <!-- 4 Process Cards -->
+                <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                    <div class="p-3.5 bg-stone-50 rounded-xl border border-stone-200 text-center">
+                        <div class="w-7 h-7 bg-teal-100 text-teal-800 font-bold rounded-lg flex items-center justify-center mx-auto mb-2 text-xs">1</div>
+                        <h4 class="font-bold text-xs mb-1">Erfassung</h4>
+                        <p class="text-[10px] text-stone-500">E2E verschlüsselte Textaufnahme.</p>
+                    </div>
+                    <div class="p-3.5 bg-stone-50 rounded-xl border border-stone-200 text-center">
+                        <div class="w-7 h-7 bg-teal-100 text-teal-800 font-bold rounded-lg flex items-center justify-center mx-auto mb-2 text-xs">2</div>
+                        <h4 class="font-bold text-xs mb-1">Dekodierung</h4>
+                        <p class="text-[10px] text-stone-500">Trennung von Lokution & Illokution.</p>
+                    </div>
+                    <div class="p-3.5 bg-stone-50 rounded-xl border border-stone-200 text-center">
+                        <div class="w-7 h-7 bg-teal-100 text-teal-800 font-bold rounded-lg flex items-center justify-center mx-auto mb-2 text-xs">3</div>
+                        <h4 class="font-bold text-xs mb-1">Abgleich</h4>
+                        <p class="text-[10px] text-stone-500">Dyadisches Memory via GraphRAG.</p>
+                    </div>
+                    <div class="p-3.5 bg-stone-50 rounded-xl border border-stone-200 text-center">
+                        <div class="w-7 h-7 bg-teal-100 text-teal-800 font-bold rounded-lg flex items-center justify-center mx-auto mb-2 text-xs">4</div>
+                        <h4 class="font-bold text-xs mb-1">Re-Framing</h4>
+                        <p class="text-[10px] text-stone-500">Tripartite Übersetzungsausgabe.</p>
+                    </div>
+                </div>
+
+                <!-- Zero-Trust Privacy Box -->
+                <div class="p-4 bg-amber-50/80 border border-amber-200 rounded-2xl flex items-start space-x-3 text-xs mt-4">
+                    <div class="text-xl shrink-0">🛡️</div>
+                    <div class="space-y-1">
+                        <h4 class="font-bold text-amber-900">Zero-Trust Privacy & Human-in-the-Loop</h4>
+                        <p class="text-amber-800 leading-relaxed text-[11px]">
+                            Keine Nachricht wird ohne deine explizite Bestätigung übersetzt oder versendet. Das System nutzt verschlüsselte Räume und präferiert On-Device-Verarbeitung.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -342,16 +459,15 @@
 
     <!-- Footer -->
     <footer class="bg-stone-900 text-stone-400 py-6 px-4 text-center text-xs space-y-1 border-t border-stone-800 mt-auto">
-        <p class="text-white font-bold">TrueWords – Multi-Dyad Relational Assistant v1.3.4</p>
+        <p class="text-white font-bold">TrueWords – Multi-Dyad Relational Assistant v1.3.6</p>
         <p class="text-stone-500">© 2026 TrueWords Architecture Lab</p>
     </footer>
 
-    <!-- JavaScript Logic -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW TrueWords v1.3.4 active'))
+                    .then(reg => console.log('SW TrueWords v1.3.6 active'))
                     .catch(err => console.warn('SW error:', err));
             });
         }
