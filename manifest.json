@@ -1,6 +1,6 @@
 {
 "name": "KI-Beziehungsübersetzer",
-"short_name": "RelationalAI",
+"short_name": "TrueWords",
 "description": "Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.",
 "start_url": "./index.html",
 "display": "standalone",
