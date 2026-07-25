@@ -1,8 +1,8 @@
 {
 "name": "TrueWords – KI-Beziehungsübersetzer",
 "short_name": "TrueWords",
-"version": "1.2.0",
-"description": "TrueWords v1.2.0 – Multi-Context KI-Beziehungsübersetzer für Partnerschaft, Beruf und Freundschaft.",
+"version": "1.3.0",
+"description": "TrueWords v1.3.0 – Multi-Context & Multi-Dyad KI-Beziehungsübersetzer für Partnerschaft, Beruf und Freundschaft.",
 "start_url": "./index.html",
 "display": "standalone",
 "background_color": "#fdfaf7",
