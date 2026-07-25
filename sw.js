@@ -1,5 +1,4 @@
-
-const CACHE_NAME = 'relational-ai-v1';
+const CACHE_NAME = 'truewords-v1.0.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -12,7 +11,7 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] Pre-caching offline assets');
+      console.log('[SW TrueWords v1.0.0] Pre-caching offline assets');
       return cache.addAll(ASSETS_TO_CACHE);
     }).then(() => self.skipWaiting())
   );
@@ -24,7 +23,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
-            console.log('[SW] Clearing old cache:', cache);
+            console.log('[SW TrueWords] Clearing old cache:', cache);
             return caches.delete(cache);
           }
         })
