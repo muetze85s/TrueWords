@@ -1,8 +1,8 @@
 {
 "name": "TrueWords – KI-Beziehungsübersetzer",
 "short_name": "TrueWords",
-"version": "1.0.1",
-"description": "TrueWords v1.0.1 – Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.",
+"version": "1.0.2",
+"description": "TrueWords v1.0.2 – Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.",
 "start_url": "./index.html",
 "display": "standalone",
 "background_color": "#0f172a",
