@@ -2,18 +2,16 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="description" content="TrueWords v1.3.1 – Personalisierter KI-Beziehungsübersetzer, Multi-Context & Dyaden-Pairing Engine">
-    <title>TrueWords v1.3.1 | KI-Beziehungsübersetzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TrueWords v1.3.3 – Relationaler KI-Übersetzer</title>
 
     <!-- PWA Setup & iOS Standalone Tags -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="TrueWords">
-    
-    <!-- SVG App Icon & Favicon -->
+
+    <!-- PNG High-Res Base64 App Icon for iOS & Android -->
     <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M96 130h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-90l-54 42v-42h-36c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%230d9488'/><path d='M236 216h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-36v42l-54-42h-90c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%23f43f5e' opacity='0.95'/></svg>">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M96 130h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-90l-54 42v-42h-36c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%230d9488'/><path d='M236 216h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-36v42l-54-42h-90c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%23f43f5e' opacity='0.95'/></svg>">
 
@@ -69,7 +67,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-teal-100">
+<body class="bg-[#fdfaf7] text-stone-900 antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Header Navigation -->
     <nav class="sticky top-0 z-50 glass-card mx-2 mt-2 md:mx-3 md:mt-3 px-3 md:px-5 py-3 shadow-sm border border-stone-200">
@@ -78,7 +76,7 @@
                 <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-stone-900 flex items-center justify-center font-black text-white text-xs shadow">TW</div>
                 <div>
                     <h1 class="text-sm md:text-base font-extrabold tracking-tight text-stone-900 leading-none">TrueWords</h1>
-                    <p class="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-wider mt-0.5">v1.3.1 • Multi-Dyad Engine</p>
+                    <p class="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-wider mt-0.5">v1.3.3 • Multi-Dyad Engine</p>
                 </div>
             </div>
             <div class="flex items-center gap-2 flex-wrap justify-end">
@@ -91,7 +89,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10 w-full">
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10 w-full flex-grow">
 
         <!-- Intro Banner -->
         <header class="text-center space-y-3 max-w-2xl mx-auto">
@@ -185,13 +183,42 @@
                                 </p>
                             </div>
                             
-                            <!-- Human in the Loop approval button -->
-                            <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-stone-200 text-xs">
-                                <span class="text-stone-500 font-semibold">Human-in-the-Loop:</span>
-                                <button onclick="confirmIntention()" id="btn-confirm-intent" class="px-3 py-1.5 bg-teal-600 text-white font-bold rounded-lg hover:bg-teal-700 transition text-[11px]">
-                                    ✓ Absicht korrekt (Senden)
-                                </button>
+                            <!-- Human in the Loop approval & veto buttons -->
+                            <div class="space-y-3 p-3 bg-white rounded-xl border border-stone-200 text-xs">
+                                <div class="flex items-center justify-between gap-2 flex-wrap">
+                                    <span class="text-stone-500 font-semibold text-[11px]">Human-in-the-Loop:</span>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="confirmIntention()" id="btn-confirm-intent" class="px-3 py-1.5 bg-teal-600 text-white font-bold rounded-lg hover:bg-teal-700 transition text-[11px]">
+                                            ✓ Absicht korrekt (Senden)
+                                        </button>
+                                        <button onclick="toggleCorrectionPanel()" id="btn-veto-intent" class="px-3 py-1.5 bg-rose-50 text-rose-700 border border-rose-200 font-bold rounded-lg hover:bg-rose-100 transition text-[11px]">
+                                            ✗ Nein (Absicht korrigieren)
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Dropdown & Custom Correction Box (Hidden by default) -->
+                                <div id="correction-panel" class="hidden pt-3 border-t border-stone-200 space-y-3">
+                                    <span class="text-[11px] font-bold text-rose-800 block">Was wolltest du eigentlich ausdrücken? (Wähle aus oder beschreibe frei):</span>
+                                    
+                                    <select id="correction-dropdown" onchange="handleDropdownChange()" class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-xs font-medium text-stone-800 focus:outline-none focus:border-rose-500">
+                                        <option value="">-- Option / Vorschlag auswählen --</option>
+                                        <option value="pause">1. Wunsch nach Pause / Selbstschutz ohne Konflikt</option>
+                                        <option value="zuwendung">2. Wunsch nach emotionaler Zuwendung vor Argumenten</option>
+                                        <option value="klaerung">3. Klärungsbedarf für Verständnis ohne Vorwurf</option>
+                                        <option value="custom">4. Eigene Beschreibung eingeben...</option>
+                                    </select>
+
+                                    <div id="correction-custom-box" class="hidden space-y-2">
+                                        <input type="text" id="correction-custom-input" placeholder="Beschreibe deine Absicht kurz in eigenen Worten..." class="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs focus:outline-none focus:border-rose-500 bg-white">
+                                    </div>
+
+                                    <button onclick="applyCorrection()" class="w-full py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg text-xs transition shadow-sm">
+                                        Korrektur ins dyadische Gedächtnis übernehmen ✨
+                                    </button>
+                                </div>
                             </div>
+
                             <p id="sim-focus" class="text-[11px] text-stone-400 italic text-center font-medium">Fokus: Bindung, Emotionen, Schutzraum</p>
                         </div>
                     </div>
@@ -460,7 +487,7 @@
                         </div>
                         <div class="p-3 bg-white rounded-xl border border-stone-200 font-semibold flex items-center gap-3 shadow-sm">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">2</span>
-                            Human-in-the-Loop Absichts-Bestätigung
+                            Human-in-the-Loop Absichts-Bestätigung & Veto-System
                         </div>
                         <div class="p-3 bg-white rounded-xl border border-stone-200 font-semibold flex items-center gap-3 shadow-sm">
                             <span class="w-6 h-6 rounded-full bg-amber-600 text-white flex items-center justify-center text-[10px] font-bold">3</span>
@@ -481,8 +508,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-stone-900 text-stone-400 py-8 px-4 text-center text-xs space-y-2 border-t border-stone-800">
-        <p class="text-white font-bold">TrueWords – Multi-Dyad Relational Assistant v1.3.0</p>
+    <footer class="bg-stone-900 text-stone-400 py-8 px-4 text-center text-xs space-y-2 border-t border-stone-800 mt-auto">
+        <p class="text-white font-bold">TrueWords – Multi-Dyad Relational Assistant v1.3.3</p>
         <p class="text-stone-500">© 2026 TrueWords Architecture Lab • Relationale KI-Assistenz</p>
     </footer>
 
@@ -492,7 +519,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW TrueWords v1.3.1 registered'))
+                    .then(reg => console.log('SW TrueWords v1.3.3 registered'))
                     .catch(err => console.warn('SW error:', err));
             });
         }
@@ -575,6 +602,7 @@
             document.getElementById('sim-intent').innerText = p.intent;
             document.getElementById('sim-translation').innerText = p.translation;
             document.getElementById('custom-msg-input').value = '';
+            document.getElementById('correction-panel').classList.add('hidden');
         }
 
         function translateCustomMessage() {
@@ -582,15 +610,16 @@
             if (!input) return;
 
             document.getElementById('sim-original').innerText = `"${input}"`;
+            document.getElementById('correction-panel').classList.add('hidden');
             
-            // Advanced semantic re-framing engine (Context & Pattern Analysis)
+            // Advanced semantic re-framing engine
             let extractedIntent = "";
             let translatedMsg = "";
 
             const lower = input.toLowerCase();
             const recipient = spaceData[currentSpaceKey].recipient;
 
-            // Pattern 1: Boundary & Exhaustion ("raus", "keine lust", "müde", "schluss", "pause", "akku", "ruhe")
+            // Pattern 1: Boundary & Exhaustion
             if (lower.includes("raus") || lower.includes("müde") || lower.includes("pause") || lower.includes("ruhe") || lower.includes("überfordert") || lower.includes("keine kraft") || lower.includes("akku")) {
                 extractedIntent = "Signalisierte Überlastung und ein wichtiges Selbstschutz-Bedürfnis nach Abgrenzung & Erholung, um Konflikte durch Erschöpfung zu vermeiden.";
                 if (currentSpaceKey === 'partnership') {
@@ -601,7 +630,7 @@
                     translatedMsg = `"Ich bin für heute mental erschöpft und klinke mich aus. Lass uns morgen in Ruhe weiterreden, wenn ich wieder Kraft habe."`;
                 }
             } 
-            // Pattern 2: Inquiry / Logic ("warum", "weshalb", "wieso", "grund", "erklär")
+            // Pattern 2: Inquiry / Logic
             else if (lower.includes("warum") || lower.includes("weshalb") || lower.includes("wieso") || lower.includes("grund")) {
                 extractedIntent = "Suche nach sachlicher und logischer Nachvollziehbarkeit vor der emotionalen oder inhaltlichen Bindung.";
                 if (currentSpaceKey === 'partnership') {
@@ -612,7 +641,7 @@
                     translatedMsg = `"Ich möchte verstehen, wie du zu diesem Punkt kommst, um Missverständnisse zwischen uns zu vermeiden."`;
                 }
             } 
-            // Pattern 3: Defense / Pressure ("müssen", "immer", "nie", "rechtfertigen", "druck", "vorwurf")
+            // Pattern 3: Defense / Pressure
             else if (lower.includes("rechtfertigen") || lower.includes("nie") || lower.includes("immer") || lower.includes("druck") || lower.includes("vorwurf")) {
                 extractedIntent = "Wunsch nach einem sicheren Kommunikationsraum ohne Rechtfertigungs- oder Beweisdruck.";
                 if (currentSpaceKey === 'partnership') {
@@ -623,7 +652,7 @@
                     translatedMsg = `"Ich teile mein Gefühl mit dir, um ehrlich zu sein – nicht um dir Schuld zuzuweisen."`;
                 }
             } 
-            // Pattern 4: Need / Emotion ("brauche", "gefühl", "angst", "traurig", "sorge", "wunsch")
+            // Pattern 4: Need / Emotion
             else if (lower.includes("brauche") || lower.includes("gefühl") || lower.includes("angst") || lower.includes("sorge") || lower.includes("wunsch") || lower.includes("hoffe")) {
                 extractedIntent = "Offenlegen eines emotionalen Schutzbedürfnisses ohne Angriff auf das Gegenüber.";
                 if (currentSpaceKey === 'partnership') {
@@ -634,7 +663,7 @@
                     translatedMsg = `"Mir ist unsere Freundschaft wichtig, deshalb spreche ich an, was mich beschäftigt."`;
                 }
             } 
-            // Fallback: Smart contextual framing
+            // Fallback
             else {
                 extractedIntent = `Dekodierte Absicht im Beziehungs-Raum [${currentSpaceKey.toUpperCase()}]: Wunsch nach klarem und empathischem Austausch ohne Fehlinterpretationen.`;
                 if (currentSpaceKey === 'partnership') {
@@ -648,6 +677,62 @@
 
             document.getElementById('sim-intent').innerText = extractedIntent;
             document.getElementById('sim-translation').innerText = translatedMsg;
+        }
+
+        // Toggle Correction Panel (Dropdown & Custom Description)
+        function toggleCorrectionPanel() {
+            const panel = document.getElementById('correction-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function handleDropdownChange() {
+            const select = document.getElementById('correction-dropdown');
+            const customBox = document.getElementById('correction-custom-box');
+            if (select.value === 'custom') {
+                customBox.classList.remove('hidden');
+            } else {
+                customBox.classList.add('hidden');
+            }
+        }
+
+        function applyCorrection() {
+            const select = document.getElementById('correction-dropdown');
+            const customVal = document.getElementById('correction-custom-input').value.trim();
+            const recipient = spaceData[currentSpaceKey].recipient;
+
+            let updatedIntent = "";
+            let updatedTranslation = "";
+
+            if (select.value === 'pause') {
+                updatedIntent = "Korrigierte Absicht: Ausdrücklicher Wunsch nach Selbstschutz & zeitweiliger Erholung ohne emotionalen Abstand.";
+                updatedTranslation = `"Ich brauche gerade etwas Zeit für mich, um mich zu erholen. Das richtet sich nicht gegen dich oder ${recipient}."`;
+            } else if (select.value === 'zuwendung') {
+                updatedIntent = "Korrigierte Absicht: Wunsch nach emotionaler Verbindung & Zuwendung vor sachlichen Lösungsansätzen.";
+                updatedTranslation = `"Ich wünsche mir gerade vor allem dein Verständnis und Nahsein, bevor wir das sachlich analysieren."`;
+            } else if (select.value === 'klaerung') {
+                updatedIntent = "Korrigierte Absicht: Wunsch nach klarer Abstimmung für ein gemeinsames Verständnis ohne Vorwürfe.";
+                updatedTranslation = `"Mir geht es darum, die Situation gemeinsam zu klären, damit wir auf demselben Stand sind."`;
+            } else if (select.value === 'custom' && customVal) {
+                updatedIntent = `Manuell korrigierte Absicht: "${customVal}"`;
+                updatedTranslation = `"Übersetzung für ${recipient} (aus deiner manuellen Absicht gelernt): Ich möchte dir ausdrücken, dass ${customVal}."`;
+            } else {
+                alert("Bitte wähle eine Option aus oder gib eine eigene Beschreibung ein.");
+                return;
+            }
+
+            document.getElementById('sim-intent').innerText = updatedIntent;
+            document.getElementById('sim-translation').innerText = updatedTranslation;
+
+            // Feedback & Hide Panel
+            document.getElementById('correction-panel').classList.add('hidden');
+            const btnConfirm = document.getElementById('btn-confirm-intent');
+            btnConfirm.innerText = "✓ Korrektur im Gedächtnis gelernt!";
+            btnConfirm.className = "px-3 py-1.5 bg-emerald-600 text-white font-bold rounded-lg text-[11px]";
+            
+            setTimeout(() => {
+                btnConfirm.innerText = "✓ Absicht korrekt (Senden)";
+                btnConfirm.className = "px-3 py-1.5 bg-teal-600 text-white font-bold rounded-lg hover:bg-teal-700 transition text-[11px]";
+            }, 3000);
         }
 
         function confirmIntention() {
