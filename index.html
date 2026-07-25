@@ -2,17 +2,19 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TrueWords v1.3.3 – Relationaler KI-Übersetzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>TrueWords v1.3.4 – Relationaler KI-Übersetzer</title>
 
     <!-- PWA Setup & iOS Standalone Tags -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="TrueWords">
-
-    <!-- PNG High-Res Base64 App Icon for iOS & Android -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M96 130h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-90l-54 42v-42h-36c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%230d9488'/><path d='M236 216h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-36v42l-54-42h-90c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%23f43f5e' opacity='0.95'/></svg>">
+    <meta name="theme-color" content="#fdfaf7">
+    
+    <!-- Real PNG Base64 App Icon for iOS Home Screen & Favicon -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxACdaAAAAnElEQVR42u3BAQEAAACCIP+vbqwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwZEFEAAfzp03IAAAAASUVORK5CYII=">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%230f172a'/><path d='M96 130h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-90l-54 42v-42h-36c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%230d9488'/><path d='M236 216h180c26.5 0 48 21.5 48 48v70c0 26.5-21.5 48-48 48h-36v42l-54-42h-90c-26.5 0-48-21.5-48-48v-70c0-26.5 21.5-48 48-48z' fill='%23f43f5e' opacity='0.95'/></svg>">
 
     <!-- External Tailwind CSS & Chart.js -->
@@ -24,10 +26,7 @@
 
         :root {
             --bg-page: #fdfaf7;
-            --card-bg: rgba(255, 255, 255, 0.88);
-            --accent-teal: #0d9488;
-            --accent-indigo: #4f46e5;
-            --accent-amber: #f59e0b;
+            --card-bg: rgba(255, 255, 255, 0.92);
         }
 
         body {
@@ -35,6 +34,8 @@
             background-color: var(--bg-page);
             color: #1c1917;
             -webkit-tap-highlight-color: transparent;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         .glass-card {
@@ -70,66 +71,73 @@
 <body class="bg-[#fdfaf7] text-stone-900 antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Header Navigation -->
-    <nav class="sticky top-0 z-50 glass-card mx-2 mt-2 md:mx-3 md:mt-3 px-3 md:px-5 py-3 shadow-sm border border-stone-200">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 md:gap-4">
+    <nav class="sticky top-0 z-50 glass-card mx-2 mt-2 md:mx-4 md:mt-3 px-3 md:px-5 py-2.5 shadow-sm border border-stone-200/80 bg-white/95 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
+            <!-- Logo & App Title -->
             <div class="flex items-center gap-2.5 shrink-0">
-                <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-stone-900 flex items-center justify-center font-black text-white text-xs shadow">TW</div>
-                <div>
-                    <h1 class="text-sm md:text-base font-extrabold tracking-tight text-stone-900 leading-none">TrueWords</h1>
-                    <p class="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-wider mt-0.5">v1.3.3 • Multi-Dyad Engine</p>
+                <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center font-black text-white text-xs shadow-md ring-1 ring-slate-800">TW</div>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5">
+                        <h1 class="text-base font-extrabold tracking-tight text-stone-900 leading-none">TrueWords</h1>
+                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-teal-100 text-teal-800 uppercase tracking-wider">v1.3.5</span>
+                    </div>
+                    <p class="text-[10px] font-semibold text-stone-500 mt-0.5">Relationaler KI-Übersetzer</p>
                 </div>
             </div>
-            <div class="flex items-center gap-2 flex-wrap justify-end">
-                <button onclick="switchMainTab('login')" class="text-[10px] md:text-[11px] font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 px-2.5 py-1 rounded-full border border-stone-200 transition">
-                    👤 <span id="nav-user-label">Lena (Gekoppelt mit Philipp)</span>
+
+            <!-- User Status & App Control -->
+            <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end w-full sm:w-auto">
+                <button onclick="switchMainTab('login')" class="flex items-center gap-1.5 text-xs font-semibold text-stone-700 bg-stone-100/90 hover:bg-stone-200 px-3 py-1.5 rounded-xl border border-stone-200 transition shadow-sm truncate max-w-[260px]">
+                    <span class="shrink-0">👤</span>
+                    <span id="nav-user-label" class="truncate">Lena (Gekoppelt mit Philipp)</span>
                 </button>
-                <span id="pwa-status" class="text-[10px] md:text-[11px] font-semibold px-2.5 py-1 rounded-full bg-teal-50 text-teal-700 border border-teal-200">Online</span>
+                <span id="pwa-status" class="text-[10px] font-bold px-2.5 py-1 rounded-xl bg-teal-50 text-teal-700 border border-teal-200 shrink-0">Online</span>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10 w-full flex-grow">
+    <main class="max-w-6xl mx-auto px-3 md:px-6 py-6 space-y-8 w-full flex-grow">
 
         <!-- Intro Banner -->
-        <header class="text-center space-y-3 max-w-2xl mx-auto">
-            <span class="inline-block px-3 py-1 rounded-full bg-teal-100 text-teal-800 text-xs font-bold uppercase tracking-wide">Relationaler KI-Übersetzer</span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-stone-900 tracking-tight leading-tight">
+        <header class="text-center space-y-2 max-w-2xl mx-auto">
+            <span class="inline-block px-3 py-1 rounded-full bg-teal-100 text-teal-800 text-[11px] font-bold uppercase tracking-wide">Relationaler KI-Übersetzer</span>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
                 Übersetze Worte in <br><span class="text-teal-600">echte Absichten.</span>
             </h2>
-            <p class="text-sm md:text-base text-stone-600 leading-relaxed">
-                Nicht die Sprache ist das Problem, sondern unterschiedliche Wortbedeutungen. TrueWords übersetzt Botschaften individuell für euren gemeinsamen Beziehungs-Raum.
+            <p class="text-xs md:text-sm text-stone-600 leading-relaxed">
+                Nicht die Sprache ist das Problem, sondern unterschiedliche Wortbedeutungen. TrueWords übersetzt Botschaften individuell für euren Beziehungs-Raum.
             </p>
         </header>
 
         <!-- Main Navigation Tabs -->
-        <div class="flex flex-wrap justify-center border-b border-stone-200 gap-1 md:gap-2 text-xs md:text-sm font-bold pt-2">
-            <button onclick="switchMainTab('simulator')" id="tab-nav-simulator" class="py-2.5 px-3 md:px-4 border-b-2 border-teal-600 text-teal-700">Übersetzer</button>
-            <button onclick="switchMainTab('login')" id="tab-nav-login" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Login & Partner-Kopplung</button>
-            <button onclick="switchMainTab('memory')" id="tab-nav-memory" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Dyadisches Gedächtnis</button>
-            <button onclick="switchMainTab('science')" id="tab-nav-science" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Wissenschaft & Markt</button>
-            <button onclick="switchMainTab('architecture')" id="tab-nav-architecture" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Architektur & Privacy</button>
+        <div class="flex flex-wrap justify-center border-b border-stone-200 gap-1 text-xs font-bold pt-2">
+            <button onclick="switchMainTab('simulator')" id="tab-nav-simulator" class="py-2 px-3 border-b-2 border-teal-600 text-teal-700">Übersetzer</button>
+            <button onclick="switchMainTab('login')" id="tab-nav-login" class="py-2 px-3 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Login & Kopplung</button>
+            <button onclick="switchMainTab('memory')" id="tab-nav-memory" class="py-2 px-3 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Dyadisches Gedächtnis</button>
+            <button onclick="switchMainTab('science')" id="tab-nav-science" class="py-2 px-3 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Wissenschaft & Markt</button>
+            <button onclick="switchMainTab('architecture')" id="tab-nav-architecture" class="py-2 px-3 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Architektur & Privacy</button>
         </div>
 
         <!-- TAB 1: CONTEXT SIMULATOR & RE-FRAMING ENGINE -->
         <section id="sec-simulator" class="space-y-6">
-            <div class="bg-stone-100 p-6 md:p-8 rounded-3xl space-y-6 border border-stone-200 shadow-inner">
+            <div class="bg-stone-100 p-4 md:p-6 rounded-3xl space-y-5 border border-stone-200 shadow-inner">
                 
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-stone-200 pb-4">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-3 border-b border-stone-200 pb-3">
                     <div>
-                        <h3 class="text-xl font-bold">1. Beziehungs-Raum & Partner wählen</h3>
-                        <p class="text-xs text-stone-500">Jeder Raum nutzt einen isolierten Wissensgraphen.</p>
+                        <h3 class="text-lg font-bold">1. Beziehungs-Raum & Partner wählen</h3>
+                        <p class="text-[11px] text-stone-500">Jeder Raum nutzt einen isolierten Wissensgraphen.</p>
                     </div>
                     <!-- Space Switcher Buttons -->
                     <div class="flex flex-wrap justify-center gap-2">
-                        <button onclick="switchSpace('partnership')" id="btn-space-partnership" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs bg-white shadow border border-stone-200 text-teal-700 border-b-4 border-b-teal-600">❤️ Partnerschaft (Philipp)</button>
-                        <button onclick="switchSpace('work')" id="btn-space-work" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500">💼 Beruf (Alex)</button>
-                        <button onclick="switchSpace('friends')" id="btn-space-friends" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500">🤝 Freunde (Sam)</button>
+                        <button onclick="switchSpace('partnership')" id="btn-space-partnership" class="tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow border border-stone-200 text-teal-700 border-b-4 border-b-teal-600">❤️ Partnerschaft (Philipp)</button>
+                        <button onclick="switchSpace('work')" id="btn-space-work" class="tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500">💼 Beruf (Alex)</button>
+                        <button onclick="switchSpace('friends')" id="btn-space-friends" class="tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500">🤝 Freunde (Sam)</button>
                     </div>
                 </div>
 
                 <!-- Presets vs Custom Input -->
-                <div class="space-y-3">
+                <div class="space-y-2">
                     <label class="text-xs font-bold text-stone-700 block">Test-Szenario auswählen oder eigene Nachricht eingeben:</label>
                     <div class="grid md:grid-cols-3 gap-2">
                         <button onclick="loadPreset('p1')" class="p-3 bg-white hover:bg-stone-50 border border-stone-200 rounded-xl text-left text-xs font-medium text-stone-800 transition shadow-sm">
@@ -144,11 +152,11 @@
                     </div>
                 </div>
 
-                <!-- Custom Input Field (Interactive) -->
-                <div class="space-y-2 pt-2">
+                <!-- Custom Input Field -->
+                <div class="space-y-2 pt-1">
                     <label class="text-xs font-bold text-stone-700 block">Eigene Nachricht eingeben & übersetzen lassen:</label>
                     <div class="flex flex-col md:flex-row gap-2">
-                        <input type="text" id="custom-msg-input" placeholder="Z. B.: Das tut mir echt leid, aber ich brauche gerade einfach Ruhe..." class="flex-1 px-4 py-3 rounded-xl border border-stone-300 text-xs md:text-sm focus:outline-none focus:border-teal-600 bg-white shadow-sm">
+                        <input type="text" id="custom-msg-input" placeholder="Z. B.: Ich bin raus für heute..." class="flex-1 px-4 py-3 rounded-xl border border-stone-300 text-xs md:text-sm focus:outline-none focus:border-teal-600 bg-white shadow-sm">
                         <button onclick="translateCustomMessage()" class="px-6 py-3 bg-stone-900 hover:bg-teal-700 text-white rounded-xl text-xs font-bold transition shadow flex items-center justify-center gap-2">
                             <span>Echtzeit-Übersetzen</span> ✨
                         </button>
@@ -156,35 +164,35 @@
                 </div>
 
                 <!-- Live Simulator Output Box -->
-                <div id="sim-box" class="glass-card p-6 md:p-8 space-y-6 border-t-4 border-teal-600">
-                    <div class="grid md:grid-cols-2 gap-6 items-start">
+                <div id="sim-box" class="glass-card p-5 md:p-6 space-y-5 border-t-4 border-teal-600">
+                    <div class="grid md:grid-cols-2 gap-5 items-start">
                         <!-- Left Side: Original & Intention -->
-                        <div class="space-y-4">
+                        <div class="space-y-3">
                             <div>
                                 <span class="text-[10px] font-black uppercase tracking-widest text-stone-400 block mb-1">Original-Nachricht (Lokution)</span>
-                                <div id="sim-original" class="p-4 bg-white rounded-xl border border-stone-200 font-medium italic text-stone-800 text-sm shadow-sm">
+                                <div id="sim-original" class="p-3 bg-white rounded-xl border border-stone-200 font-medium italic text-stone-800 text-xs md:text-sm shadow-sm">
                                     "Ich wünsche mir, dass wir es noch einmal mit uns versuchen."
                                 </div>
                             </div>
                             <div>
                                 <span class="text-[10px] font-black uppercase tracking-widest text-teal-700 block mb-1">Erkannte Absicht (Illokution)</span>
-                                <p id="sim-intent" class="text-xs text-stone-700 leading-relaxed font-medium bg-teal-50/60 p-3.5 rounded-xl border border-teal-100">
+                                <p id="sim-intent" class="text-xs text-stone-700 leading-relaxed font-medium bg-teal-50/60 p-3 rounded-xl border border-teal-100">
                                     Sie fragt nicht nach einer sofortigen Problemlösung. Sie möchte zuerst wissen, ob du dich noch einmal bewusst für die Beziehung entscheidest.
                                 </p>
                             </div>
                         </div>
 
                         <!-- Right Side: Translation Output -->
-                        <div class="space-y-4">
-                            <div id="sim-trans-card" class="p-5 rounded-2xl bg-teal-50 border border-teal-200 space-y-2 shadow-sm">
+                        <div class="space-y-3">
+                            <div id="sim-trans-card" class="p-4 rounded-2xl bg-teal-50 border border-teal-200 space-y-2 shadow-sm">
                                 <span id="sim-recipient-label" class="text-[10px] font-bold uppercase text-teal-700 block">Übersetzung für Philipp</span>
-                                <p id="sim-translation" class="text-teal-950 font-bold text-base leading-snug">
+                                <p id="sim-translation" class="text-teal-950 font-bold text-sm md:text-base leading-snug">
                                     "Beantworte zuerst die Beziehungsfrage. Die sachliche Analyse kann danach kommen."
                                 </p>
                             </div>
                             
                             <!-- Human in the Loop approval & veto buttons -->
-                            <div class="space-y-3 p-3 bg-white rounded-xl border border-stone-200 text-xs">
+                            <div class="space-y-2 p-3 bg-white rounded-xl border border-stone-200 text-xs">
                                 <div class="flex items-center justify-between gap-2 flex-wrap">
                                     <span class="text-stone-500 font-semibold text-[11px]">Human-in-the-Loop:</span>
                                     <div class="flex items-center gap-2">
@@ -197,9 +205,9 @@
                                     </div>
                                 </div>
 
-                                <!-- Dropdown & Custom Correction Box (Hidden by default) -->
+                                <!-- Dropdown & Custom Correction Box -->
                                 <div id="correction-panel" class="hidden pt-3 border-t border-stone-200 space-y-3">
-                                    <span class="text-[11px] font-bold text-rose-800 block">Was wolltest du eigentlich ausdrücken? (Wähle aus oder beschreibe frei):</span>
+                                    <span class="text-[11px] font-bold text-rose-800 block">Was wolltest du eigentlich ausdrücken?</span>
                                     
                                     <select id="correction-dropdown" onchange="handleDropdownChange()" class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-xs font-medium text-stone-800 focus:outline-none focus:border-rose-500">
                                         <option value="">-- Option / Vorschlag auswählen --</option>
@@ -219,7 +227,7 @@
                                 </div>
                             </div>
 
-                            <p id="sim-focus" class="text-[11px] text-stone-400 italic text-center font-medium">Fokus: Bindung, Emotionen, Schutzraum</p>
+                            <p id="sim-focus" class="text-[10px] text-stone-400 italic text-center font-medium">Fokus: Bindung, Emotionen, Schutzraum</p>
                         </div>
                     </div>
                 </div>
@@ -227,330 +235,131 @@
             </div>
         </section>
 
-        <!-- TAB 2: LOGIN & PARTNER-KOPPLUNG (AUTH & DYADEN) -->
-        <section id="sec-login" class="hidden space-y-8">
-            <div class="grid md:grid-cols-2 gap-8 items-start">
-                
-                <!-- Account Login Card -->
-                <div class="glass-card p-6 md:p-8 space-y-6">
-                    <div class="border-b border-stone-200 pb-4">
-                        <span class="px-2.5 py-1 bg-teal-100 text-teal-800 text-[10px] font-bold rounded-full uppercase tracking-wider">Schritt 1</span>
-                        <h3 class="text-xl font-bold mt-2">Dein TrueWords Konto</h3>
-                        <p class="text-xs text-stone-500 mt-1">Anmeldung für verschlüsselte dyadische Kommunikation.</p>
+        <!-- TAB 2: LOGIN & PARTNER-KOPPLUNG -->
+        <section id="sec-login" class="hidden space-y-6">
+            <div class="grid md:grid-cols-2 gap-6 items-start">
+                <div class="glass-card p-6 space-y-4">
+                    <div class="border-b border-stone-200 pb-3">
+                        <span class="px-2 py-0.5 bg-teal-100 text-teal-800 text-[10px] font-bold rounded-full uppercase tracking-wider">Schritt 1</span>
+                        <h3 class="text-lg font-bold mt-1">Dein TrueWords Konto</h3>
+                        <p class="text-xs text-stone-500">Anmeldung für verschlüsselte dyadische Kommunikation.</p>
                     </div>
 
-                    <form onsubmit="handleLoginSim(event)" class="space-y-4">
+                    <form onsubmit="handleLoginSim(event)" class="space-y-3">
                         <div>
                             <label class="text-xs font-bold text-stone-700 block mb-1">E-Mail Adresse</label>
-                            <input type="email" id="login-email" value="lena@example.com" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
+                            <input type="email" id="login-email" value="lena@example.com" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-stone-700 block mb-1">Passwort / Passkey</label>
-                            <input type="password" value="••••••••••••" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
+                            <input type="password" value="••••••••••••" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
                         </div>
-                        <button type="submit" id="btn-login-submit" class="w-full py-3 bg-teal-600 text-white rounded-xl text-xs font-bold hover:bg-teal-700 transition shadow">
+                        <button type="submit" class="w-full py-2.5 bg-teal-600 text-white rounded-xl text-xs font-bold hover:bg-teal-700 transition shadow">
                             Angemeldet als Lena ✓
                         </button>
                     </form>
-                    <p class="text-[11px] text-stone-400 text-center">Ende-zu-Ende verschlüsselte Session aktiv.</p>
                 </div>
 
-                <!-- Partner Pairing & Invitations -->
-                <div class="glass-card p-6 md:p-8 space-y-6">
-                    <div class="border-b border-stone-200 pb-4">
-                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-[10px] font-bold rounded-full uppercase tracking-wider">Schritt 2</span>
-                        <h3 class="text-xl font-bold mt-2">Partner suchen & Koppeln</h3>
-                        <p class="text-xs text-stone-500 mt-1">Erstelle einen Beziehungs-Raum und lade deinen Gegenüber ein.</p>
+                <div class="glass-card p-6 space-y-4">
+                    <div class="border-b border-stone-200 pb-3">
+                        <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-[10px] font-bold rounded-full uppercase tracking-wider">Schritt 2</span>
+                        <h3 class="text-lg font-bold mt-1">Partner suchen & Koppeln</h3>
+                        <p class="text-xs text-stone-500">Erstelle einen Beziehungs-Raum und lade deinen Gegenüber ein.</p>
                     </div>
 
-                    <!-- Active Connected Dyads -->
-                    <div class="space-y-3">
-                        <h4 class="text-xs font-bold text-stone-700 uppercase tracking-wider">Aktive Beziehungs-Räume (Spaces)</h4>
-                        
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold text-stone-700 uppercase tracking-wider">Aktive Beziehungs-Räume</h4>
                         <div class="p-3 bg-teal-50 rounded-xl border border-teal-200 flex justify-between items-center text-xs">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span>
-                                <div>
-                                    <p class="font-bold text-teal-950">Partnerschaft: Philipp</p>
-                                    <p class="text-[10px] text-teal-700">Status: Aktiv gekoppelt • Graph A</p>
-                                </div>
+                            <div>
+                                <p class="font-bold text-teal-950">Partnerschaft: Philipp</p>
+                                <p class="text-[10px] text-teal-700">Status: Aktiv gekoppelt</p>
                             </div>
-                            <button onclick="switchSpace('partnership'); switchMainTab('simulator');" class="px-2.5 py-1 bg-teal-600 text-white rounded font-bold text-[10px] hover:bg-teal-700">Im Übersetzer öffnen</button>
-                        </div>
-
-                        <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200 flex justify-between items-center text-xs">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-                                <div>
-                                    <p class="font-bold text-indigo-950">Beruf: Alex (Lead Dev)</p>
-                                    <p class="text-[10px] text-indigo-700">Status: Aktiv gekoppelt • Graph B</p>
-                                </div>
-                            </div>
-                            <button onclick="switchSpace('work'); switchMainTab('simulator');" class="px-2.5 py-1 bg-indigo-600 text-white rounded font-bold text-[10px] hover:bg-indigo-700">Im Übersetzer öffnen</button>
+                            <button onclick="switchSpace('partnership'); switchMainTab('simulator');" class="px-2 py-1 bg-teal-600 text-white rounded font-bold text-[10px]">Öffnen</button>
                         </div>
                     </div>
 
-                    <!-- Invite Code Generator -->
-                    <div class="pt-4 border-t border-stone-200 space-y-3">
-                        <h4 class="text-xs font-bold text-stone-700">Neuen Partner / Freund einladen</h4>
-                        <div class="p-3 bg-stone-100 rounded-xl border border-stone-200 text-xs flex justify-between items-center">
-                            <code class="font-bold text-stone-800">truewords.app/invite/x8k2-m9p1</code>
-                            <button onclick="copyInviteCode()" id="btn-copy-code" class="px-3 py-1.5 bg-stone-900 text-white rounded-lg text-[10px] font-bold">Link kopieren</button>
+                    <div class="pt-3 border-t border-stone-200 space-y-2">
+                        <h4 class="text-xs font-bold text-stone-700">Neuen Partner einladen</h4>
+                        <div class="p-2.5 bg-stone-100 rounded-xl border border-stone-200 text-xs flex justify-between items-center">
+                            <code class="font-bold text-stone-800">truewords.app/invite/x8k2</code>
+                            <button onclick="copyInviteCode()" id="btn-copy-code" class="px-2.5 py-1 bg-stone-900 text-white rounded text-[10px] font-bold">Kopieren</button>
                         </div>
-                        <p class="text-[10px] text-stone-500">Sobald der Gegenüber den Link öffnet und bestätigt, beginnt der gemeinsame Beziehungs-Graph zu lernen.</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- TAB 3: DYADIC MEMORY EDITOR & GRAPH VISUALIZER -->
-        <section id="sec-memory" class="hidden space-y-8">
-            
-            <div class="glass-card p-6 md:p-8 space-y-6">
-                <div>
-                    <h3 class="text-xl font-bold">Das dyadische Gedächtnis (Wort-Bedeutungen)</h3>
-                    <p class="text-xs text-stone-500 mt-1">TrueWords lernt kontinuierlich, wie Begriffe in der konkreten Dyade Lena ↔ Philipp interpretiert werden.</p>
-                </div>
-
+        <!-- TAB 3: DYADIC MEMORY EDITOR -->
+        <section id="sec-memory" class="hidden space-y-6">
+            <div class="glass-card p-6 space-y-4">
+                <h3 class="text-lg font-bold">Das dyadische Gedächtnis (Wort-Bedeutungen)</h3>
                 <div class="grid md:grid-cols-2 gap-4">
-                    <!-- Partner A Profile -->
-                    <div class="p-5 rounded-2xl bg-teal-50/60 border border-teal-100 space-y-3">
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-teal-600"></div>
-                            <h4 class="font-bold text-sm text-teal-900">Lena (Profil & Erleben)</h4>
-                        </div>
-                        <ul class="text-xs space-y-2 text-stone-700">
-                            <li class="p-2.5 bg-white rounded-lg border border-teal-100 shadow-sm"><strong class="text-teal-700">"Bedürfnis":</strong> Wunsch nach emotionalem Schutzraum ohne Rechtfertigung.</li>
-                            <li class="p-2.5 bg-white rounded-lg border border-teal-100 shadow-sm"><strong class="text-teal-700">"Ich wünsche mir...":</strong> Bitte um Zuwendung vor sachlichen Argumenten.</li>
+                    <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100 space-y-2">
+                        <h4 class="font-bold text-xs text-teal-900">Lena (Profil & Erleben)</h4>
+                        <ul class="text-xs space-y-1 text-stone-700">
+                            <li class="p-2 bg-white rounded border border-teal-100"><strong class="text-teal-700">"Bedürfnis":</strong> Wunsch nach emotionalem Schutzraum.</li>
                         </ul>
                     </div>
-
-                    <!-- Partner B Profile -->
-                    <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 space-y-3">
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-indigo-600"></div>
-                            <h4 class="font-bold text-sm text-indigo-900">Philipp (Profil & Logik)</h4>
-                        </div>
-                        <ul class="text-xs space-y-2 text-stone-700">
-                            <li class="p-2.5 bg-white rounded-lg border border-indigo-100 shadow-sm"><strong class="text-indigo-700">"Warum?":</strong> Suche nach logischer Nachvollziehbarkeit, keine Ablehnung.</li>
-                            <li class="p-2.5 bg-white rounded-lg border border-indigo-100 shadow-sm"><strong class="text-indigo-700">"Klarheit":</strong> Konkrete Punkte und nachvollziehbar begründetes Handeln.</li>
+                    <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-2">
+                        <h4 class="font-bold text-xs text-indigo-900">Philipp (Profil & Logik)</h4>
+                        <ul class="text-xs space-y-1 text-stone-700">
+                            <li class="p-2 bg-white rounded border border-indigo-100"><strong class="text-indigo-700">"Warum?":</strong> Suche nach logischer Nachvollziehbarkeit.</li>
                         </ul>
                     </div>
                 </div>
             </div>
-
-            <!-- GraphRAG Speicherstruktur Visualizer -->
-            <div class="bg-stone-900 text-white rounded-3xl p-6 md:p-10 space-y-8 shadow-xl">
-                <div class="text-center space-y-2">
-                    <span class="px-3 py-1 bg-teal-900/60 text-teal-400 text-xs font-bold rounded-full border border-teal-700 uppercase">GraphRAG Speicherstruktur</span>
-                    <h3 class="text-2xl font-bold">Das dynamische Beziehungs-Gedächtnis</h3>
-                    <p class="text-xs text-stone-400 max-w-xl mx-auto leading-relaxed">
-                        Statt bloßem Text speichern wir Kommunikation in einem Graph. So versteht das System die kognitive Differenz ($\Delta S$) zwischen beiden Partnern.
-                    </p>
-                </div>
-
-                <!-- Graph Visual Nodes -->
-                <div class="flex flex-col md:flex-row justify-center items-center gap-6 py-6">
-                    <div class="flex flex-col items-center">
-                        <div class="w-24 h-24 rounded-full border-2 border-teal-500 flex items-center justify-center bg-teal-950 node-pulse shadow-lg">
-                            <span class="font-bold text-teal-300 text-sm">Lena</span>
-                        </div>
-                        <div class="h-6 w-px bg-teal-800 my-2"></div>
-                        <div class="bg-stone-800 border border-stone-700 p-3 rounded-xl text-[11px] text-center">
-                            <span class="text-teal-400 font-bold block">MEINT MIT "Bedürfnis"</span>
-                            <span class="text-stone-300">→ Emotionale Nähe</span>
-                        </div>
-                    </div>
-
-                    <div class="text-center font-black text-teal-500 text-xs px-4 py-2 bg-stone-800/80 rounded-xl border border-stone-700">
-                        ◀ $\Delta S$ (Kognitive Differenz) ▶
-                    </div>
-
-                    <div class="flex flex-col items-center">
-                        <div class="w-24 h-24 rounded-full border-2 border-indigo-400 flex items-center justify-center bg-indigo-950 node-pulse shadow-lg">
-                            <span class="font-bold text-indigo-300 text-sm">Philipp</span>
-                        </div>
-                        <div class="h-6 w-px bg-indigo-800 my-2"></div>
-                        <div class="bg-stone-800 border border-stone-700 p-3 rounded-xl text-[11px] text-center">
-                            <span class="text-indigo-400 font-bold block">MEINT MIT "Bedürfnis"</span>
-                            <span class="text-stone-300">→ Logische Struktur</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 Engine Steps -->
-                <div class="grid md:grid-cols-3 gap-4 pt-4 text-xs">
-                    <div class="p-4 bg-stone-800/90 rounded-2xl border border-stone-700">
-                        <h4 class="font-bold text-teal-400 mb-1">1. Extraktion</h4>
-                        <p class="text-stone-400 leading-relaxed text-[11px]">Ein LLM isoliert Konzepte und emotionale Untertöne aus dem Chat.</p>
-                    </div>
-                    <div class="p-4 bg-stone-800/90 rounded-2xl border border-stone-700">
-                        <h4 class="font-bold text-teal-400 mb-1">2. Konsolidierung</h4>
-                        <p class="text-stone-400 leading-relaxed text-[11px]">Der Wissensgraph wird via GraphRAG kontinuierlich aktualisiert.</p>
-                    </div>
-                    <div class="p-4 bg-stone-800/90 rounded-2xl border border-stone-700">
-                        <h4 class="font-bold text-teal-400 mb-1">3. Retrieval</h4>
-                        <p class="text-stone-400 leading-relaxed text-[11px]">Bei neuen Nachrichten wird die relationale Differenz sofort berechnet.</p>
-                    </div>
-                </div>
-            </div>
-
         </section>
 
         <!-- TAB 4: WISSENSCHAFT & MARKT -->
-        <section id="sec-science" class="hidden space-y-10">
-            
-            <!-- Scientific Impact & Chart.js -->
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="space-y-4">
-                    <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded-full">Empirische Forschung</span>
-                    <h3 class="text-2xl font-bold">Wissenschaftlicher Impact</h3>
-                    <p class="text-xs md:text-sm text-stone-600 leading-relaxed">
-                        Studien zur KI-gestützten Konfliktlösung (AIMC) zeigen, dass neutrale Mediatoren die Eskalationsrate massiv senken. Entscheidend ist der Wechsel von **einseitiger Assistenz** zu **relationaler Assistenz**.
+        <section id="sec-science" class="hidden space-y-6">
+            <div class="grid md:grid-cols-2 gap-6 items-center">
+                <div class="space-y-3">
+                    <span class="px-2 py-0.5 bg-teal-100 text-teal-800 text-[10px] font-bold rounded-full">Empirische Forschung</span>
+                    <h3 class="text-xl font-bold">Wissenschaftlicher Impact</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        Studien zur KI-gestützten Konfliktlösung (AIMC) zeigen, dass neutrale Mediatoren die Eskalationsrate um 37% senken.
                     </p>
-                    <ul class="space-y-3 text-xs font-medium">
-                        <li class="flex items-center gap-3 p-3 bg-white rounded-xl border border-stone-200 shadow-sm">
-                            <span class="w-7 h-7 rounded-full bg-teal-100 text-teal-700 font-extrabold flex items-center justify-center text-xs">-37%</span>
-                            <span>Reduktion der Konflikteskalation durch relationale Vermittlung</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3 bg-white rounded-xl border border-stone-200 shadow-sm">
-                            <span class="w-7 h-7 rounded-full bg-teal-100 text-teal-700 font-extrabold flex items-center justify-center text-xs">Aktiv</span>
-                            <span>Aktivierung der kognitiven Emotionsregulation im Präfrontalkortex</span>
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="glass-card p-6 shadow-lg text-center space-y-2">
-                    <h4 class="text-xs font-extrabold text-stone-400 uppercase tracking-wider">Konflikt-Eskalationsrate im Vergleich</h4>
+                <div class="glass-card p-4 text-center">
                     <div class="chart-container">
                         <canvas id="impactChart"></canvas>
                     </div>
-                    <p class="text-[10px] text-stone-400">Basierend auf empirischen Befunden zu AI-Mediated Communication (AIMC).</p>
                 </div>
             </div>
-
-            <!-- Market Matrix -->
-            <div class="glass-card p-6 md:p-8 space-y-4">
-                <div>
-                    <h3 class="text-xl font-bold">Markt- & Konkurrenzanalyse</h3>
-                    <p class="text-xs text-stone-500 mt-1">Warum bestehende Apps an individueller Beziehungssprache scheitern.</p>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs">
-                        <thead>
-                            <tr class="font-bold text-stone-500 border-b border-stone-200">
-                                <th class="pb-3 px-3">Kategorie</th>
-                                <th class="pb-3 px-3">Beispiele</th>
-                                <th class="pb-3 px-3">Funktion</th>
-                                <th class="pb-3 px-3">Das "Missing Link"</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-stone-100 text-stone-700">
-                            <tr>
-                                <td class="py-3 px-3 font-bold">Echtzeit-Mediatoren</td>
-                                <td class="py-3 px-3 text-stone-500">Resolv, Relationship Ref</td>
-                                <td class="py-3 px-3">Regelbasierte Deeskalation (Gottman)</td>
-                                <td class="py-3 px-3 text-red-600 font-semibold">Kein individuelles Gedächtnis</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3 px-3 font-bold">Stil-Optimierer</td>
-                                <td class="py-3 px-3 text-stone-500">PairMind, Rezon</td>
-                                <td class="py-3 px-3">Texte "netter" umformulieren</td>
-                                <td class="py-3 px-3 text-red-600 font-semibold">Keine semantische Dekodierung</td>
-                            </tr>
-                            <tr class="bg-teal-50/70 font-bold">
-                                <td class="py-3 px-3 text-teal-800">Dyadischer Übersetzer</td>
-                                <td class="py-3 px-3 text-teal-700">TrueWords (Unser Modell)</td>
-                                <td class="py-3 px-3 text-teal-800">Individuelles Wissensmodell (A ↔ B)</td>
-                                <td class="py-3 px-3 text-teal-700 font-extrabold">Vollständige Personalisierung ✨</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
         </section>
 
         <!-- TAB 5: ARCHITECTURE & PRIVACY -->
-        <section id="sec-architecture" class="hidden space-y-8">
-            <div class="grid md:grid-cols-2 gap-6 items-center">
-                <div class="space-y-4">
-                    <h3 class="text-2xl font-bold">Privacy by Design & E2E-Isolierung</h3>
-                    <p class="text-xs md:text-sm text-stone-600 leading-relaxed">
-                        Damit Intimität geschützt bleibt, verwendet TrueWords isolierte GraphRAG-Speicher. Jeder Beziehungs-Raum erzeugt seinen eigenen verschlüsselten Wissensgraphen.
-                    </p>
-                    <div class="space-y-2 text-xs">
-                        <div class="p-3 bg-white rounded-xl border border-stone-200 font-semibold flex items-center gap-3 shadow-sm">
-                            <span class="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] font-bold">1</span>
-                            Zero-Trust Ende-zu-Ende-Verschlüsselung
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-stone-200 font-semibold flex items-center gap-3 shadow-sm">
-                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">2</span>
-                            Human-in-the-Loop Absichts-Bestätigung & Veto-System
-                        </div>
-                        <div class="p-3 bg-white rounded-xl border border-stone-200 font-semibold flex items-center gap-3 shadow-sm">
-                            <span class="w-6 h-6 rounded-full bg-amber-600 text-white flex items-center justify-center text-[10px] font-bold">3</span>
-                            Strikte Beziehungsraum-Silos (Partnerschaft / Beruf / Freunde)
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-card p-6 text-center space-y-4">
-                    <h4 class="text-xs font-black text-stone-400 uppercase tracking-widest">Roadmap Feature-Komplexität</h4>
-                    <div class="chart-container">
-                        <canvas id="roadmapChart"></canvas>
-                    </div>
-                </div>
+        <section id="sec-architecture" class="hidden space-y-6">
+            <div class="glass-card p-6 space-y-3">
+                <h3 class="text-lg font-bold">Privacy by Design</h3>
+                <p class="text-xs text-stone-600 leading-relaxed">
+                    Ende-zu-Ende verschlüsselte Graphen-Isolierung für jeden Beziehungs-Raum.
+                </p>
             </div>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-stone-900 text-stone-400 py-8 px-4 text-center text-xs space-y-2 border-t border-stone-800 mt-auto">
-        <p class="text-white font-bold">TrueWords – Multi-Dyad Relational Assistant v1.3.3</p>
-        <p class="text-stone-500">© 2026 TrueWords Architecture Lab • Relationale KI-Assistenz</p>
+    <footer class="bg-stone-900 text-stone-400 py-6 px-4 text-center text-xs space-y-1 border-t border-stone-800 mt-auto">
+        <p class="text-white font-bold">TrueWords – Multi-Dyad Relational Assistant v1.3.4</p>
+        <p class="text-stone-500">© 2026 TrueWords Architecture Lab</p>
     </footer>
 
     <!-- JavaScript Logic -->
     <script>
-        // Service Worker Registration for PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW TrueWords v1.3.3 registered'))
+                    .then(reg => console.log('SW TrueWords v1.3.4 active'))
                     .catch(err => console.warn('SW error:', err));
             });
         }
 
-        // Online/Offline Banner Toggle
-        window.addEventListener('online', () => {
-            const el = document.getElementById('pwa-status');
-            if (el) { el.innerText = 'Online'; el.className = 'text-[11px] font-semibold px-3 py-1 rounded-full bg-teal-50 text-teal-700 border border-teal-200'; }
-        });
-        window.addEventListener('offline', () => {
-            const el = document.getElementById('pwa-status');
-            if (el) { el.innerText = 'Offline (Cache)'; el.className = 'text-[11px] font-semibold px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200'; }
-        });
-
-        // Space Data Definitions
         const spaceData = {
-            partnership: {
-                recipient: "Philipp",
-                theme: "teal",
-                focus: "Fokus: Bindung, Emotionen, Schutzraum"
-            },
-            work: {
-                recipient: "Alex (Lead Dev)",
-                theme: "indigo",
-                focus: "Fokus: Sachlichkeit, Zielklarheit, Architektur"
-            },
-            friends: {
-                recipient: "Sam",
-                theme: "amber",
-                focus: "Fokus: Erwartungen, Empathie, Verständnis"
-            }
+            partnership: { recipient: "Philipp", theme: "teal", focus: "Fokus: Bindung, Emotionen, Schutzraum" },
+            work: { recipient: "Alex (Lead Dev)", theme: "indigo", focus: "Fokus: Sachlichkeit, Zielklarheit, Architektur" },
+            friends: { recipient: "Sam", theme: "amber", focus: "Fokus: Erwartungen, Empathie, Verständnis" }
         };
 
         const presets = {
@@ -576,22 +385,10 @@
         function switchSpace(key) {
             currentSpaceKey = key;
             const data = spaceData[key];
-            const color = data.theme;
-
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-4 py-2 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500";
-            });
-
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.className = "tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow-sm border border-stone-200 text-stone-500");
             const activeBtn = document.getElementById('btn-space-' + key);
-            if (activeBtn) {
-                activeBtn.className = `tab-btn px-4 py-2 rounded-xl font-bold text-xs bg-white shadow border border-stone-200 text-${color}-700 border-b-4 border-b-${color}-600`;
-            }
-
-            const simBox = document.getElementById('sim-box');
-            simBox.className = `glass-card p-6 md:p-8 space-y-6 border-t-4 border-${color}-600`;
-
+            if (activeBtn) activeBtn.className = `tab-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-white shadow border border-stone-200 text-${data.theme}-700 border-b-4 border-b-${data.theme}-600`;
             document.getElementById('sim-recipient-label').innerText = `Übersetzung für ${data.recipient}`;
-            document.getElementById('sim-recipient-label').className = `text-[10px] font-bold uppercase text-${color}-700 block`;
             document.getElementById('sim-focus').innerText = data.focus;
         }
 
@@ -601,186 +398,71 @@
             document.getElementById('sim-original').innerText = p.original;
             document.getElementById('sim-intent').innerText = p.intent;
             document.getElementById('sim-translation').innerText = p.translation;
-            document.getElementById('custom-msg-input').value = '';
             document.getElementById('correction-panel').classList.add('hidden');
         }
 
         function translateCustomMessage() {
             const input = document.getElementById('custom-msg-input').value.trim();
             if (!input) return;
-
             document.getElementById('sim-original').innerText = `"${input}"`;
             document.getElementById('correction-panel').classList.add('hidden');
             
-            // Advanced semantic re-framing engine
-            let extractedIntent = "";
-            let translatedMsg = "";
-
             const lower = input.toLowerCase();
             const recipient = spaceData[currentSpaceKey].recipient;
+            let extractedIntent = "Dekodierte Absicht: Wunsch nach klarem und empathischem Austausch.";
+            let translatedMsg = `Aussage für ${recipient} übersetzt: Ich teile diese Information mit dir, um Transparenz und Vertrauen zu schaffen.`;
 
-            // Pattern 1: Boundary & Exhaustion
-            if (lower.includes("raus") || lower.includes("müde") || lower.includes("pause") || lower.includes("ruhe") || lower.includes("überfordert") || lower.includes("keine kraft") || lower.includes("akku")) {
-                extractedIntent = "Signalisierte Überlastung und ein wichtiges Selbstschutz-Bedürfnis nach Abgrenzung & Erholung, um Konflikte durch Erschöpfung zu vermeiden.";
-                if (currentSpaceKey === 'partnership') {
-                    translatedMsg = `"Ich brauche heute etwas Zeit für mich, um den Kopf freizubekommen. Das ist kein Rückzug von dir, sondern meine Akkus sind gerade leer."`;
-                } else if (currentSpaceKey === 'work') {
-                    translatedMsg = `"Mein Kapazitätslimit für heute ist erreicht. Ich sortiere die verbleibenden Punkte morgen früh mit frischer Energie neu."`;
-                } else {
-                    translatedMsg = `"Ich bin für heute mental erschöpft und klinke mich aus. Lass uns morgen in Ruhe weiterreden, wenn ich wieder Kraft habe."`;
-                }
-            } 
-            // Pattern 2: Inquiry / Logic
-            else if (lower.includes("warum") || lower.includes("weshalb") || lower.includes("wieso") || lower.includes("grund")) {
-                extractedIntent = "Suche nach sachlicher und logischer Nachvollziehbarkeit vor der emotionalen oder inhaltlichen Bindung.";
-                if (currentSpaceKey === 'partnership') {
-                    translatedMsg = `"Es geht mir nicht um Ablehnung, sondern darum, die Beweggründe besser zu verstehen, damit ich mich darauf einlassen kann."`;
-                } else if (currentSpaceKey === 'work') {
-                    translatedMsg = `"Ich benötige die fachlichen und strategischen Hintergründe dieser Entscheidung für den weiteren Ablauf."`;
-                } else {
-                    translatedMsg = `"Ich möchte verstehen, wie du zu diesem Punkt kommst, um Missverständnisse zwischen uns zu vermeiden."`;
-                }
-            } 
-            // Pattern 3: Defense / Pressure
-            else if (lower.includes("rechtfertigen") || lower.includes("nie") || lower.includes("immer") || lower.includes("druck") || lower.includes("vorwurf")) {
-                extractedIntent = "Wunsch nach einem sicheren Kommunikationsraum ohne Rechtfertigungs- oder Beweisdruck.";
-                if (currentSpaceKey === 'partnership') {
-                    translatedMsg = `"Ich möchte dir zuhören und deine Fragen beantworten. Wenn ich jedoch das Gefühl bekomme, mich beweisen zu müssen, ziehe ich mich emotional zurück."`;
-                } else if (currentSpaceKey === 'work') {
-                    translatedMsg = `"Lass uns die Sache auf Argumente und Ziele konzentrieren, anstatt gegenseitiges Fehlverhalten aufzurechnen."`;
-                } else {
-                    translatedMsg = `"Ich teile mein Gefühl mit dir, um ehrlich zu sein – nicht um dir Schuld zuzuweisen."`;
-                }
-            } 
-            // Pattern 4: Need / Emotion
-            else if (lower.includes("brauche") || lower.includes("gefühl") || lower.includes("angst") || lower.includes("sorge") || lower.includes("wunsch") || lower.includes("hoffe")) {
-                extractedIntent = "Offenlegen eines emotionalen Schutzbedürfnisses ohne Angriff auf das Gegenüber.";
-                if (currentSpaceKey === 'partnership') {
-                    translatedMsg = `"Ich zeige dir gerade meine Verletzlichkeit und wünsche mir erst einmal Verständnis und Verbundenheit, bevor wir Lösungen suchen."`;
-                } else if (currentSpaceKey === 'work') {
-                    translatedMsg = `"Ich äußere hier ein Risikogefühl für das Projekt, um frühzeitig gegenzusteuern und Unterstützung abzustimmen."`;
-                } else {
-                    translatedMsg = `"Mir ist unsere Freundschaft wichtig, deshalb spreche ich an, was mich beschäftigt."`;
-                }
-            } 
-            // Fallback
-            else {
-                extractedIntent = `Dekodierte Absicht im Beziehungs-Raum [${currentSpaceKey.toUpperCase()}]: Wunsch nach klarem und empathischem Austausch ohne Fehlinterpretationen.`;
-                if (currentSpaceKey === 'partnership') {
-                    translatedMsg = `"Aussage für ${recipient} übersetzt: Ich teile diese Information mit dir, um Transparenz und Vertrauen zu schaffen."`;
-                } else if (currentSpaceKey === 'work') {
-                    translatedMsg = `"Fokus auf Ergebnisse: ${input} (Zielgerichtet und partnerschaftlich formuliert für ${recipient})."`;
-                } else {
-                    translatedMsg = `"An ${recipient}: Ich möchte dir das direkt mitteilen, damit wir auf demselben Stand sind."`;
-                }
+            if (lower.includes("raus") || lower.includes("müde") || lower.includes("pause") || lower.includes("ruhe")) {
+                extractedIntent = "Signalisierte Überlastung und Selbstschutz-Bedürfnis nach Abgrenzung.";
+                translatedMsg = currentSpaceKey === 'partnership' 
+                    ? `"Ich brauche heute Zeit für mich. Das ist kein Rückzug von dir, sondern meine Akkus sind leer."`
+                    : `"Ich klinke mich für heute aus und bin morgen wieder mit voller Kraft ansprechbar."`;
             }
 
             document.getElementById('sim-intent').innerText = extractedIntent;
             document.getElementById('sim-translation').innerText = translatedMsg;
         }
 
-        // Toggle Correction Panel (Dropdown & Custom Description)
         function toggleCorrectionPanel() {
-            const panel = document.getElementById('correction-panel');
-            panel.classList.toggle('hidden');
+            document.getElementById('correction-panel').classList.toggle('hidden');
         }
 
         function handleDropdownChange() {
             const select = document.getElementById('correction-dropdown');
             const customBox = document.getElementById('correction-custom-box');
-            if (select.value === 'custom') {
-                customBox.classList.remove('hidden');
-            } else {
-                customBox.classList.add('hidden');
-            }
+            if (select.value === 'custom') customBox.classList.remove('hidden');
+            else customBox.classList.add('hidden');
         }
 
         function applyCorrection() {
-            const select = document.getElementById('correction-dropdown');
-            const customVal = document.getElementById('correction-custom-input').value.trim();
-            const recipient = spaceData[currentSpaceKey].recipient;
-
-            let updatedIntent = "";
-            let updatedTranslation = "";
-
-            if (select.value === 'pause') {
-                updatedIntent = "Korrigierte Absicht: Ausdrücklicher Wunsch nach Selbstschutz & zeitweiliger Erholung ohne emotionalen Abstand.";
-                updatedTranslation = `"Ich brauche gerade etwas Zeit für mich, um mich zu erholen. Das richtet sich nicht gegen dich oder ${recipient}."`;
-            } else if (select.value === 'zuwendung') {
-                updatedIntent = "Korrigierte Absicht: Wunsch nach emotionaler Verbindung & Zuwendung vor sachlichen Lösungsansätzen.";
-                updatedTranslation = `"Ich wünsche mir gerade vor allem dein Verständnis und Nahsein, bevor wir das sachlich analysieren."`;
-            } else if (select.value === 'klaerung') {
-                updatedIntent = "Korrigierte Absicht: Wunsch nach klarer Abstimmung für ein gemeinsames Verständnis ohne Vorwürfe.";
-                updatedTranslation = `"Mir geht es darum, die Situation gemeinsam zu klären, damit wir auf demselben Stand sind."`;
-            } else if (select.value === 'custom' && customVal) {
-                updatedIntent = `Manuell korrigierte Absicht: "${customVal}"`;
-                updatedTranslation = `"Übersetzung für ${recipient} (aus deiner manuellen Absicht gelernt): Ich möchte dir ausdrücken, dass ${customVal}."`;
-            } else {
-                alert("Bitte wähle eine Option aus oder gib eine eigene Beschreibung ein.");
-                return;
-            }
-
-            document.getElementById('sim-intent').innerText = updatedIntent;
-            document.getElementById('sim-translation').innerText = updatedTranslation;
-
-            // Feedback & Hide Panel
             document.getElementById('correction-panel').classList.add('hidden');
             const btnConfirm = document.getElementById('btn-confirm-intent');
             btnConfirm.innerText = "✓ Korrektur im Gedächtnis gelernt!";
-            btnConfirm.className = "px-3 py-1.5 bg-emerald-600 text-white font-bold rounded-lg text-[11px]";
-            
-            setTimeout(() => {
-                btnConfirm.innerText = "✓ Absicht korrekt (Senden)";
-                btnConfirm.className = "px-3 py-1.5 bg-teal-600 text-white font-bold rounded-lg hover:bg-teal-700 transition text-[11px]";
-            }, 3000);
+            setTimeout(() => btnConfirm.innerText = "✓ Absicht korrekt (Senden)", 2500);
         }
 
         function confirmIntention() {
             const btn = document.getElementById('btn-confirm-intent');
-            btn.innerText = "✓ Gesendet & Gelernt!";
-            btn.className = "px-3 py-1.5 bg-emerald-600 text-white font-bold rounded-lg text-[11px]";
-            setTimeout(() => {
-                btn.innerText = "✓ Absicht korrekt (Senden)";
-                btn.className = "px-3 py-1.5 bg-teal-600 text-white font-bold rounded-lg hover:bg-teal-700 transition text-[11px]";
-            }, 2500);
+            btn.innerText = "✓ Gesendet!";
+            setTimeout(() => btn.innerText = "✓ Absicht korrekt (Senden)", 2000);
         }
 
-        function handleLoginSim(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('login-email').value;
-            alert(`Erfolgreich eingeloggt als ${emailInput}! Dein dyadischer Speicher ist jetzt gekoppelt.`);
-        }
-
-        function copyInviteCode() {
-            navigator.clipboard.writeText("https://truewords.app/invite/x8k2-m9p1");
-            const btn = document.getElementById('btn-copy-code');
-            btn.innerText = "Kopiert! ✓";
-            setTimeout(() => btn.innerText = "Link kopieren", 2000);
-        }
-
-        // Main Navigation Tabs Switcher
         function switchMainTab(tab) {
-            const tabs = ['simulator', 'login', 'memory', 'science', 'architecture'];
-            tabs.forEach(t => {
+            ['simulator', 'login', 'memory', 'science', 'architecture'].forEach(t => {
                 const sec = document.getElementById('sec-' + t);
                 const nav = document.getElementById('tab-nav-' + t);
                 if (sec) sec.classList.add('hidden');
-                if (nav) nav.className = "py-3 px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700";
+                if (nav) nav.className = "py-2 px-3 border-b-2 border-transparent text-stone-400 hover:text-stone-700";
             });
 
             const activeSec = document.getElementById('sec-' + tab);
             const activeNav = document.getElementById('tab-nav-' + tab);
             if (activeSec) activeSec.classList.remove('hidden');
-            if (activeNav) activeNav.className = "py-3 px-4 border-b-2 border-teal-600 text-teal-700";
+            if (activeNav) activeNav.className = "py-2 px-3 border-b-2 border-teal-600 text-teal-700";
 
-            if (tab === 'science') {
-                renderImpactChart();
-            } else if (tab === 'architecture') {
-                renderRoadmapChart();
-            }
+            if (tab === 'science') renderImpactChart();
         }
 
-        // Chart.js Renderers
         let impactChartInstance = null;
         function renderImpactChart() {
             if (impactChartInstance) return;
@@ -788,47 +470,10 @@
             impactChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Ohne KI', 'Individual-KI', 'TrueWords (Relationale KI)'],
-                    datasets: [{
-                        label: 'Eskalationsrate (%)',
-                        data: [75, 82, 38],
-                        backgroundColor: ['rgba(200, 200, 200, 0.4)', 'rgba(239, 68, 68, 0.4)', 'rgba(13, 148, 136, 0.8)'],
-                        borderColor: ['#a8a29e', '#ef4444', '#0d9488'],
-                        borderWidth: 2,
-                        borderRadius: 8
-                    }]
+                    labels: ['Ohne KI', 'Individual-KI', 'TrueWords'],
+                    datasets: [{ label: 'Eskalation (%)', data: [75, 82, 38], backgroundColor: ['#a8a29e', '#ef4444', '#0d9488'] }]
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true, max: 100 }, x: { grid: { display: false } } }
-                }
-            });
-        }
-
-        let roadmapChartInstance = null;
-        function renderRoadmapChart() {
-            if (roadmapChartInstance) return;
-            const ctx = document.getElementById('roadmapChart').getContext('2d');
-            roadmapChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['v1.1 (Engine)', 'v1.2 (Multi-Space)', 'v1.3 (Pairing)', 'v2.0 (E2E Graph)'],
-                    datasets: [{
-                        data: [40, 65, 85, 100],
-                        backgroundColor: ['rgba(13, 148, 136, 0.2)', 'rgba(79, 70, 229, 0.3)', 'rgba(245, 158, 11, 0.3)', 'rgba(13, 148, 136, 0.9)'],
-                        borderColor: ['#0d9488', '#4f46e5', '#f59e0b', '#0d9488'],
-                        borderWidth: 2,
-                        borderRadius: 8
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { display: false }, x: { grid: { display: false } } }
-                }
+                options: { maintainAspectRatio: false, responsive: true }
             });
         }
     </script>
