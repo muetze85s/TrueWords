@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d9488">
-    <meta name="description" content="TrueWords v1.3.0 – Personalisierter KI-Beziehungsübersetzer, Multi-Context & Dyaden-Pairing Engine">
-    <title>TrueWords v1.3.0 | KI-Beziehungsübersetzer</title>
+    <meta name="description" content="TrueWords v1.3.1 – Personalisierter KI-Beziehungsübersetzer, Multi-Context & Dyaden-Pairing Engine">
+    <title>TrueWords v1.3.1 | KI-Beziehungsübersetzer</title>
 
     <!-- PWA Setup & iOS Standalone Tags -->
     <link rel="manifest" href="manifest.json">
@@ -72,18 +72,20 @@
 <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-teal-100">
 
     <!-- Header Navigation -->
-    <nav class="sticky top-0 z-50 glass-card mx-3 mt-3 px-5 py-3 shadow-sm border border-stone-200">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-stone-900 flex items-center justify-center font-black text-white text-xs shadow">TW</div>
+    <nav class="sticky top-0 z-50 glass-card mx-2 mt-2 md:mx-3 md:mt-3 px-3 md:px-5 py-3 shadow-sm border border-stone-200">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 md:gap-4">
+            <div class="flex items-center gap-2.5 shrink-0">
+                <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-stone-900 flex items-center justify-center font-black text-white text-xs shadow">TW</div>
                 <div>
-                    <h1 class="text-base font-extrabold tracking-tight text-stone-900">TrueWords</h1>
-                    <p class="text-[10px] font-bold text-teal-600 uppercase tracking-wider">v1.3.0 • Multi-Dyad Engine</p>
+                    <h1 class="text-sm md:text-base font-extrabold tracking-tight text-stone-900 leading-none">TrueWords</h1>
+                    <p class="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-wider mt-0.5">v1.3.1 • Multi-Dyad Engine</p>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <span id="user-badge" class="hidden md:inline-block text-[11px] font-bold text-stone-600 bg-stone-100 px-3 py-1 rounded-full border border-stone-200">Eingeloggt als: Lena</span>
-                <span id="pwa-status" class="text-[11px] font-semibold px-3 py-1 rounded-full bg-teal-50 text-teal-700 border border-teal-200">Online</span>
+            <div class="flex items-center gap-2 flex-wrap justify-end">
+                <button onclick="switchMainTab('login')" class="text-[10px] md:text-[11px] font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 px-2.5 py-1 rounded-full border border-stone-200 transition">
+                    👤 <span id="nav-user-label">Lena (Gekoppelt mit Philipp)</span>
+                </button>
+                <span id="pwa-status" class="text-[10px] md:text-[11px] font-semibold px-2.5 py-1 rounded-full bg-teal-50 text-teal-700 border border-teal-200">Online</span>
             </div>
         </div>
     </nav>
@@ -103,12 +105,12 @@
         </header>
 
         <!-- Main Navigation Tabs -->
-        <div class="flex flex-wrap justify-center border-b border-stone-200 gap-1 md:gap-2 text-xs md:text-sm font-bold">
-            <button onclick="switchMainTab('simulator')" id="tab-nav-simulator" class="py-3 px-4 border-b-2 border-teal-600 text-teal-700">Übersetzer</button>
-            <button onclick="switchMainTab('login')" id="tab-nav-login" class="py-3 px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Login & Kopplung</button>
-            <button onclick="switchMainTab('memory')" id="tab-nav-memory" class="py-3 px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Dyadisches Gedächtnis</button>
-            <button onclick="switchMainTab('science')" id="tab-nav-science" class="py-3 px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Wissenschaft & Markt</button>
-            <button onclick="switchMainTab('architecture')" id="tab-nav-architecture" class="py-3 px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Architektur & Privacy</button>
+        <div class="flex flex-wrap justify-center border-b border-stone-200 gap-1 md:gap-2 text-xs md:text-sm font-bold pt-2">
+            <button onclick="switchMainTab('simulator')" id="tab-nav-simulator" class="py-2.5 px-3 md:px-4 border-b-2 border-teal-600 text-teal-700">Übersetzer</button>
+            <button onclick="switchMainTab('login')" id="tab-nav-login" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Login & Partner-Kopplung</button>
+            <button onclick="switchMainTab('memory')" id="tab-nav-memory" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Dyadisches Gedächtnis</button>
+            <button onclick="switchMainTab('science')" id="tab-nav-science" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Wissenschaft & Markt</button>
+            <button onclick="switchMainTab('architecture')" id="tab-nav-architecture" class="py-2.5 px-3 md:px-4 border-b-2 border-transparent text-stone-400 hover:text-stone-700">Architektur & Privacy</button>
         </div>
 
         <!-- TAB 1: CONTEXT SIMULATOR & RE-FRAMING ENGINE -->
@@ -117,7 +119,7 @@
                 
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-stone-200 pb-4">
                     <div>
-                        <h3 class="text-xl font-bold">1. Beziehungs-Raum wählen</h3>
+                        <h3 class="text-xl font-bold">1. Beziehungs-Raum & Partner wählen</h3>
                         <p class="text-xs text-stone-500">Jeder Raum nutzt einen isolierten Wissensgraphen.</p>
                     </div>
                     <!-- Space Switcher Buttons -->
@@ -144,12 +146,15 @@
                     </div>
                 </div>
 
-                <!-- Custom Input Field -->
-                <div class="flex flex-col md:flex-row gap-2 pt-2">
-                    <input type="text" id="custom-msg-input" placeholder="Oder eigene Nachricht hier eingeben..." class="flex-1 px-4 py-3 rounded-xl border border-stone-300 text-xs md:text-sm focus:outline-none focus:border-teal-600 bg-white shadow-sm">
-                    <button onclick="translateCustomMessage()" class="px-6 py-3 bg-stone-900 text-white rounded-xl text-xs font-bold hover:bg-stone-800 transition shadow">
-                        Echtzeit-Übersetzen ✨
-                    </button>
+                <!-- Custom Input Field (Interactive) -->
+                <div class="space-y-2 pt-2">
+                    <label class="text-xs font-bold text-stone-700 block">Eigene Nachricht eingeben & übersetzen lassen:</label>
+                    <div class="flex flex-col md:flex-row gap-2">
+                        <input type="text" id="custom-msg-input" placeholder="Z. B.: Das tut mir echt leid, aber ich brauche gerade einfach Ruhe..." class="flex-1 px-4 py-3 rounded-xl border border-stone-300 text-xs md:text-sm focus:outline-none focus:border-teal-600 bg-white shadow-sm">
+                        <button onclick="translateCustomMessage()" class="px-6 py-3 bg-stone-900 hover:bg-teal-700 text-white rounded-xl text-xs font-bold transition shadow flex items-center justify-center gap-2">
+                            <span>Echtzeit-Übersetzen</span> ✨
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Live Simulator Output Box -->
@@ -210,13 +215,13 @@
                     <form onsubmit="handleLoginSim(event)" class="space-y-4">
                         <div>
                             <label class="text-xs font-bold text-stone-700 block mb-1">E-Mail Adresse</label>
-                            <input type="email" value="lena@example.com" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
+                            <input type="email" id="login-email" value="lena@example.com" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-stone-700 block mb-1">Passwort / Passkey</label>
                             <input type="password" value="••••••••••••" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-xs focus:outline-none focus:border-teal-600 bg-white">
                         </div>
-                        <button type="submit" class="w-full py-3 bg-teal-600 text-white rounded-xl text-xs font-bold hover:bg-teal-700 transition shadow">
+                        <button type="submit" id="btn-login-submit" class="w-full py-3 bg-teal-600 text-white rounded-xl text-xs font-bold hover:bg-teal-700 transition shadow">
                             Angemeldet als Lena ✓
                         </button>
                     </form>
@@ -243,7 +248,7 @@
                                     <p class="text-[10px] text-teal-700">Status: Aktiv gekoppelt • Graph A</p>
                                 </div>
                             </div>
-                            <span class="px-2 py-1 bg-teal-200 text-teal-900 rounded font-bold text-[10px]">Aktiv</span>
+                            <button onclick="switchSpace('partnership'); switchMainTab('simulator');" class="px-2.5 py-1 bg-teal-600 text-white rounded font-bold text-[10px] hover:bg-teal-700">Im Übersetzer öffnen</button>
                         </div>
 
                         <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200 flex justify-between items-center text-xs">
@@ -254,7 +259,7 @@
                                     <p class="text-[10px] text-indigo-700">Status: Aktiv gekoppelt • Graph B</p>
                                 </div>
                             </div>
-                            <button onclick="switchSpace('work'); switchMainTab('simulator');" class="px-2.5 py-1 bg-indigo-600 text-white rounded font-bold text-[10px] hover:bg-indigo-700">Wechseln</button>
+                            <button onclick="switchSpace('work'); switchMainTab('simulator');" class="px-2.5 py-1 bg-indigo-600 text-white rounded font-bold text-[10px] hover:bg-indigo-700">Im Übersetzer öffnen</button>
                         </div>
                     </div>
 
@@ -302,13 +307,13 @@
                         </div>
                         <ul class="text-xs space-y-2 text-stone-700">
                             <li class="p-2.5 bg-white rounded-lg border border-indigo-100 shadow-sm"><strong class="text-indigo-700">"Warum?":</strong> Suche nach logischer Nachvollziehbarkeit, keine Ablehnung.</li>
-                            <li class="p-2.5 bg-white rounded-lg border border-indigo-100 shadow-sm"><strong class="text-indigo-700">"Klarheit":</strong> Konkrete Punkte und nachvollziehbare Begründung.</li>
+                            <li class="p-2.5 bg-white rounded-lg border border-indigo-100 shadow-sm"><strong class="text-indigo-700">"Klarheit":</strong> Konkrete Punkte und nachvollziehbar begründetes Handeln.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- GraphRAG Architecture Visualizer (From v1.0.2 / v1.0.3) -->
+            <!-- GraphRAG Speicherstruktur Visualizer -->
             <div class="bg-stone-900 text-white rounded-3xl p-6 md:p-10 space-y-8 shadow-xl">
                 <div class="text-center space-y-2">
                     <span class="px-3 py-1 bg-teal-900/60 text-teal-400 text-xs font-bold rounded-full border border-teal-700 uppercase">GraphRAG Speicherstruktur</span>
@@ -366,7 +371,7 @@
 
         </section>
 
-        <!-- TAB 4: WISSENSCHAFT & MARKT (IMPACT CHART & MARKET COMPARISON) -->
+        <!-- TAB 4: WISSENSCHAFT & MARKT -->
         <section id="sec-science" class="hidden space-y-10">
             
             <!-- Scientific Impact & Chart.js -->
@@ -398,7 +403,7 @@
                 </div>
             </div>
 
-            <!-- Market & Competitor Matrix -->
+            <!-- Market Matrix -->
             <div class="glass-card p-6 md:p-8 space-y-4">
                 <div>
                     <h3 class="text-xl font-bold">Markt- & Konkurrenzanalyse</h3>
@@ -487,7 +492,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW TrueWords v1.3.0 registered'))
+                    .then(reg => console.log('SW TrueWords v1.3.1 registered'))
                     .catch(err => console.warn('SW error:', err));
             });
         }
@@ -578,23 +583,67 @@
 
             document.getElementById('sim-original').innerText = `"${input}"`;
             
-            // Dynamic Intention & Re-Framing logic based on keywords
+            // Advanced semantic re-framing engine (Context & Pattern Analysis)
             let extractedIntent = "";
             let translatedMsg = "";
 
             const lower = input.toLowerCase();
-            if (lower.includes("warum") || lower.includes("weshalb")) {
-                extractedIntent = "Suche nach sachlicher und logischer Nachvollziehbarkeit vor der emotionalen Öffnung.";
-                translatedMsg = `"Es geht nicht um eine Absage, sondern um das Verständnis der Beweggründe."`;
-            } else if (lower.includes("nie") || lower.includes("immer") || lower.includes("muss")) {
-                extractedIntent = "Ausdruck von Überforderung und Wunsch nach Entlastung (Übertreibung signalisiert Hilferuf).";
-                translatedMsg = `"Ich fühle mich gerade nicht gehört und brauche kurz einen gemeinsamen Punkt der Ruhe."`;
-            } else if (lower.includes("brauche") || lower.includes("gefühl") || lower.includes("angst")) {
-                extractedIntent = "Offenlegen eines emotionalen Schutzbedürfnisses ohne Angriff auf den Gegenüber.";
-                translatedMsg = `"Ich teile ein Gefühl mit dir, damit du mich verstehst – nicht um Schuld zuzuweisen."`;
-            } else {
-                extractedIntent = "Freie Eingabe analysiert: Die KI dekodiert die Absicht basierend auf eurem dyadischen Speicher...";
-                translatedMsg = `"[Empathisches Re-Framing für ${spaceData[currentSpaceKey].recipient}]: ${input} (in kognitive Sprache übersetzt)"`;
+            const recipient = spaceData[currentSpaceKey].recipient;
+
+            // Pattern 1: Boundary & Exhaustion ("raus", "keine lust", "müde", "schluss", "pause", "akku", "ruhe")
+            if (lower.includes("raus") || lower.includes("müde") || lower.includes("pause") || lower.includes("ruhe") || lower.includes("überfordert") || lower.includes("keine kraft") || lower.includes("akku")) {
+                extractedIntent = "Signalisierte Überlastung und ein wichtiges Selbstschutz-Bedürfnis nach Abgrenzung & Erholung, um Konflikte durch Erschöpfung zu vermeiden.";
+                if (currentSpaceKey === 'partnership') {
+                    translatedMsg = `"Ich brauche heute etwas Zeit für mich, um den Kopf freizubekommen. Das ist kein Rückzug von dir, sondern meine Akkus sind gerade leer."`;
+                } else if (currentSpaceKey === 'work') {
+                    translatedMsg = `"Mein Kapazitätslimit für heute ist erreicht. Ich sortiere die verbleibenden Punkte morgen früh mit frischer Energie neu."`;
+                } else {
+                    translatedMsg = `"Ich bin für heute mental erschöpft und klinke mich aus. Lass uns morgen in Ruhe weiterreden, wenn ich wieder Kraft habe."`;
+                }
+            } 
+            // Pattern 2: Inquiry / Logic ("warum", "weshalb", "wieso", "grund", "erklär")
+            else if (lower.includes("warum") || lower.includes("weshalb") || lower.includes("wieso") || lower.includes("grund")) {
+                extractedIntent = "Suche nach sachlicher und logischer Nachvollziehbarkeit vor der emotionalen oder inhaltlichen Bindung.";
+                if (currentSpaceKey === 'partnership') {
+                    translatedMsg = `"Es geht mir nicht um Ablehnung, sondern darum, die Beweggründe besser zu verstehen, damit ich mich darauf einlassen kann."`;
+                } else if (currentSpaceKey === 'work') {
+                    translatedMsg = `"Ich benötige die fachlichen und strategischen Hintergründe dieser Entscheidung für den weiteren Ablauf."`;
+                } else {
+                    translatedMsg = `"Ich möchte verstehen, wie du zu diesem Punkt kommst, um Missverständnisse zwischen uns zu vermeiden."`;
+                }
+            } 
+            // Pattern 3: Defense / Pressure ("müssen", "immer", "nie", "rechtfertigen", "druck", "vorwurf")
+            else if (lower.includes("rechtfertigen") || lower.includes("nie") || lower.includes("immer") || lower.includes("druck") || lower.includes("vorwurf")) {
+                extractedIntent = "Wunsch nach einem sicheren Kommunikationsraum ohne Rechtfertigungs- oder Beweisdruck.";
+                if (currentSpaceKey === 'partnership') {
+                    translatedMsg = `"Ich möchte dir zuhören und deine Fragen beantworten. Wenn ich jedoch das Gefühl bekomme, mich beweisen zu müssen, ziehe ich mich emotional zurück."`;
+                } else if (currentSpaceKey === 'work') {
+                    translatedMsg = `"Lass uns die Sache auf Argumente und Ziele konzentrieren, anstatt gegenseitiges Fehlverhalten aufzurechnen."`;
+                } else {
+                    translatedMsg = `"Ich teile mein Gefühl mit dir, um ehrlich zu sein – nicht um dir Schuld zuzuweisen."`;
+                }
+            } 
+            // Pattern 4: Need / Emotion ("brauche", "gefühl", "angst", "traurig", "sorge", "wunsch")
+            else if (lower.includes("brauche") || lower.includes("gefühl") || lower.includes("angst") || lower.includes("sorge") || lower.includes("wunsch") || lower.includes("hoffe")) {
+                extractedIntent = "Offenlegen eines emotionalen Schutzbedürfnisses ohne Angriff auf das Gegenüber.";
+                if (currentSpaceKey === 'partnership') {
+                    translatedMsg = `"Ich zeige dir gerade meine Verletzlichkeit und wünsche mir erst einmal Verständnis und Verbundenheit, bevor wir Lösungen suchen."`;
+                } else if (currentSpaceKey === 'work') {
+                    translatedMsg = `"Ich äußere hier ein Risikogefühl für das Projekt, um frühzeitig gegenzusteuern und Unterstützung abzustimmen."`;
+                } else {
+                    translatedMsg = `"Mir ist unsere Freundschaft wichtig, deshalb spreche ich an, was mich beschäftigt."`;
+                }
+            } 
+            // Fallback: Smart contextual framing
+            else {
+                extractedIntent = `Dekodierte Absicht im Beziehungs-Raum [${currentSpaceKey.toUpperCase()}]: Wunsch nach klarem und empathischem Austausch ohne Fehlinterpretationen.`;
+                if (currentSpaceKey === 'partnership') {
+                    translatedMsg = `"Aussage für ${recipient} übersetzt: Ich teile diese Information mit dir, um Transparenz und Vertrauen zu schaffen."`;
+                } else if (currentSpaceKey === 'work') {
+                    translatedMsg = `"Fokus auf Ergebnisse: ${input} (Zielgerichtet und partnerschaftlich formuliert für ${recipient})."`;
+                } else {
+                    translatedMsg = `"An ${recipient}: Ich möchte dir das direkt mitteilen, damit wir auf demselben Stand sind."`;
+                }
             }
 
             document.getElementById('sim-intent').innerText = extractedIntent;
@@ -613,7 +662,8 @@
 
         function handleLoginSim(e) {
             e.preventDefault();
-            alert("Erfolgreich angemeldet! Dein dyadischer Speicher ist aktiv.");
+            const emailInput = document.getElementById('login-email').value;
+            alert(`Erfolgreich eingeloggt als ${emailInput}! Dein dyadischer Speicher ist jetzt gekoppelt.`);
         }
 
         function copyInviteCode() {
