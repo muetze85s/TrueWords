@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#0f172a">
-    <meta name="description" content="TrueWords v1.0.1 – Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.">
-    <title>TrueWords v1.0.1 | KI-Beziehungsübersetzer</title>
+    <meta name="description" content="TrueWords v1.0.2 – Personalisiertes dyadisches Kommunikations- und Übersetzungssystem für Paare.">
+    <title>TrueWords v1.0.2 | KI-Beziehungsübersetzer</title>
 
-    <!-- iOS Standalone / Fullscreen PWA Meta Tags (Verhindert Browser-Kopfzeile) -->
+    <!-- iOS Standalone / Fullscreen PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="TrueWords">
@@ -102,13 +102,14 @@
                 </svg>
             </div>
             <span>True<span class="text-teal-600">Words</span></span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800 border border-teal-200">v1.0.1</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800 border border-teal-200">v1.0.2</span>
         </div>
         <div class="hidden md:flex space-x-8">
             <a href="#vision" class="nav-link font-medium hover:text-teal-600 transition">Vision</a>
             <a href="#simulator" class="nav-link font-medium hover:text-teal-600 transition">Simulation</a>
             <a href="#markt" class="nav-link font-medium hover:text-teal-600 transition">Markt</a>
             <a href="#tech" class="nav-link font-medium hover:text-teal-600 transition">Technik</a>
+            <a href="#security" class="nav-link font-medium hover:text-teal-600 transition">Sicherheit</a>
         </div>
         <div class="flex items-center gap-2">
             <span class="text-[11px] px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-semibold border border-amber-200 flex items-center gap-1">
@@ -122,7 +123,7 @@
 
         <section id="vision" class="py-12 sm:py-16 text-center">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold mb-6">
-                <span>🚀 TrueWords v1.0.1</span>
+                <span>🚀 TrueWords v1.0.2</span>
                 <span>•</span>
                 <span>Home-Bildschirm App</span>
             </div>
@@ -190,7 +191,7 @@
                     </div>
                     <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-400">
                         <span>Status: Live dekodiert</span>
-                        <span>TrueWords v1.0.1 Engine</span>
+                        <span>TrueWords v1.0.2 Engine</span>
                     </div>
                 </div>
             </div>
@@ -297,14 +298,72 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 3-Schritte-Ablauf des Wissensgraphen (Wiederhergestellt) -->
+                <div class="grid md:grid-cols-3 gap-4 mt-8 text-xs">
+                    <div class="p-4 bg-slate-800/80 border border-slate-700/60 rounded-xl">
+                        <h3 class="font-bold text-teal-400 mb-1.5 text-sm">1. Extraktion</h3>
+                        <p class="text-gray-300 leading-relaxed">Ein LLM isoliert fortlaufend relevante Beziehungskonzepte & emotionale Bedeutungen aus den Nachrichten.</p>
+                    </div>
+                    <div class="p-4 bg-slate-800/80 border border-slate-700/60 rounded-xl">
+                        <h3 class="font-bold text-teal-400 mb-1.5 text-sm">2. Konsolidierung</h3>
+                        <p class="text-gray-300 leading-relaxed">Der Knowledge-Graph wird via Tool-Calling (GraphRAG / Mem0) mit individuellen Semantik-Knoten aktualisiert.</p>
+                    </div>
+                    <div class="p-4 bg-slate-800/80 border border-slate-700/60 rounded-xl">
+                        <h3 class="font-bold text-teal-400 mb-1.5 text-sm">3. Retrieval</h3>
+                        <p class="text-gray-300 leading-relaxed">Bei neuen Eingaben wird die kognitive Differenzen-Matrix (ΔS) berechnet & die Übersetzung generiert.</p>
+                    </div>
+                </div>
             </div>
             <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-teal-900 rounded-full blur-[90px] opacity-25"></div>
+        </section>
+
+        <!-- Sicherheit & Privacy Bereich (Wiederhergestellt) -->
+        <section id="security" class="py-14">
+            <div class="text-center mb-8">
+                <span class="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Sicherheit & Vertrauen</span>
+                <h2 class="text-2xl sm:text-3xl font-bold mt-3">Architektur für Intimität</h2>
+                <p class="text-xs sm:text-sm text-gray-600 mt-1">Datenschutz ist bei Beziehungskommunikation die absolute Grundvoraussetzung.</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-5 glass-card text-center hover:shadow-md transition border-t-2 border-teal-500">
+                    <div class="w-9 h-9 bg-teal-100 text-teal-700 rounded-lg flex items-center justify-center mx-auto mb-3 font-bold text-sm">1</div>
+                    <h3 class="font-bold text-sm mb-1">Erfassung</h3>
+                    <p class="text-xs text-gray-500">Ende-zu-Ende verschlüsselte lokale Textaufnahme im geschützten Raum.</p>
+                </div>
+                <div class="p-5 glass-card text-center hover:shadow-md transition border-t-2 border-teal-500">
+                    <div class="w-9 h-9 bg-teal-100 text-teal-700 rounded-lg flex items-center justify-center mx-auto mb-3 font-bold text-sm">2</div>
+                    <h3 class="font-bold text-sm mb-1">Dekodierung</h3>
+                    <p class="text-xs text-gray-500">Trennung von wörtlicher Aussage (Lokution) und wahrer Absicht (Illokution).</p>
+                </div>
+                <div class="p-5 glass-card text-center hover:shadow-md transition border-t-2 border-teal-500">
+                    <div class="w-9 h-9 bg-teal-100 text-teal-700 rounded-lg flex items-center justify-center mx-auto mb-3 font-bold text-sm">3</div>
+                    <h3 class="font-bold text-sm mb-1">Abgleich</h3>
+                    <p class="text-xs text-gray-500">Abgleich mit dem dyadischen Gedächtnis via lokal verschlüsseltem GraphRAG.</p>
+                </div>
+                <div class="p-5 glass-card text-center hover:shadow-md transition border-t-2 border-teal-500">
+                    <div class="w-9 h-9 bg-teal-100 text-teal-700 rounded-lg flex items-center justify-center mx-auto mb-3 font-bold text-sm">4</div>
+                    <h3 class="font-bold text-sm mb-1">Re-Framing</h3>
+                    <p class="text-xs text-gray-500">Lösungsorientierte Übersetzung für die Perspektive des Empfängers.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 p-6 bg-amber-50/90 border border-amber-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm">
+                <div class="text-3xl p-2 bg-amber-100 rounded-xl">🛡️</div>
+                <div>
+                    <h3 class="font-bold text-amber-900 text-sm sm:text-base">Zero-Trust Privacy & Human-in-the-Loop</h3>
+                    <p class="text-xs text-amber-800/90 leading-relaxed mt-0.5">
+                        Um Halluzinationen und verfälschte Bedeutungen zu vermeiden, nutzt TrueWords ein <em>Human-in-the-Loop</em>-Verfahren: Keine Übersetzung wird an den Partner gesendet, ohne dass der Sender die von der KI erkannte Absicht explizit bestätigt. Die Verarbeitung erfolgt bevorzugt On-Device bzw. in einer privaten Sicherheits-Enklave.
+                    </p>
+                </div>
+            </div>
         </section>
 
     </main>
 
     <footer class="py-8 border-t border-gray-200 text-center text-gray-400 text-xs">
-        <p>© 2026 TrueWords v1.0.1 – Personalisierter KI-Beziehungsübersetzer</p>
+        <p>© 2026 TrueWords v1.0.2 – Personalisierter KI-Beziehungsübersetzer</p>
         <p class="mt-1">PWA Optimiert für iOS & Android Home-Bildschirm</p>
     </footer>
 
@@ -312,8 +371,8 @@
         // Service Worker Registration for PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js?v=1.0.1')
-                    .then(reg => console.log('TrueWords v1.0.1 SW registered'))
+                navigator.serviceWorker.register('./sw.js?v=1.0.2')
+                    .then(reg => console.log('TrueWords v1.0.2 SW registered'))
                     .catch(err => console.warn('SW failed:', err));
             });
         }
